@@ -14,6 +14,11 @@
 		8463361A264F865A007DA352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84633619264F865A007DA352 /* Assets.xcassets */; };
 		8463361D264F865A007DA352 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8463361B264F865A007DA352 /* LaunchScreen.storyboard */; };
 		8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463362B264F8E35007DA352 /* ConversationsController.swift */; };
+		84633631264F992E007DA352 /* LoginControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633630264F992E007DA352 /* LoginControlller.swift */; };
+		84633635264F9943007DA352 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633634264F9943007DA352 /* RegistrationController.swift */; };
+		84633638264F9E1F007DA352 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633637264F9E1F007DA352 /* Extensions.swift */; };
+		8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463363A264FAC56007DA352 /* InputContainerView.swift */; };
+		8463363E264FB022007DA352 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463363D264FB022007DA352 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		8463361C264F865A007DA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8463361E264F865A007DA352 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8463362B264F8E35007DA352 /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
+		84633630264F992E007DA352 /* LoginControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControlller.swift; sourceTree = "<group>"; };
+		84633634264F9943007DA352 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		84633637264F9E1F007DA352 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8463363A264FAC56007DA352 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
+		8463363D264FB022007DA352 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +88,7 @@
 		84633625264F8D97007DA352 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				84633637264F9E1F007DA352 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -85,6 +96,7 @@
 		84633626264F8D9A007DA352 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8463362F264F990A007DA352 /* Authentication */,
 				8463362B264F8E35007DA352 /* ConversationsController.swift */,
 			);
 			path = Controller;
@@ -100,6 +112,8 @@
 		84633628264F8DA7007DA352 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8463363A264FAC56007DA352 /* InputContainerView.swift */,
+				8463363D264FB022007DA352 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,6 +130,15 @@
 			children = (
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		8463362F264F990A007DA352 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				84633630264F992E007DA352 /* LoginControlller.swift */,
+				84633634264F9943007DA352 /* RegistrationController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +212,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				84633615264F8658007DA352 /* ViewController.swift in Sources */,
+				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */,
+				84633631264F992E007DA352 /* LoginControlller.swift in Sources */,
+				84633635264F9943007DA352 /* RegistrationController.swift in Sources */,
 				84633613264F8658007DA352 /* SceneDelegate.swift in Sources */,
+				84633638264F9E1F007DA352 /* Extensions.swift in Sources */,
+				8463363E264FB022007DA352 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

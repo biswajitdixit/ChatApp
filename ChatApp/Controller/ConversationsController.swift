@@ -16,6 +16,7 @@ class ConvesationController:UIViewController{
         configureTableView()
     }
     
+    
     //Marks:- Selector
     @objc func showProfile(){
         print(123)
@@ -30,6 +31,7 @@ class ConvesationController:UIViewController{
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showProfile))
     }
     
+    
     func configureTableView(){
         tableView.backgroundColor = .white
         tableView.rowHeight = 80
@@ -42,6 +44,8 @@ class ConvesationController:UIViewController{
         view.addSubview(tableView)
         tableView.frame = view.frame
     }
+    
+    
     func configureNavigationBar(){
         let apperance = UINavigationBarAppearance()
         apperance.configureWithOpaqueBackground()
@@ -61,10 +65,13 @@ class ConvesationController:UIViewController{
     }
 }
 
+
+
 extension ConvesationController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
@@ -74,6 +81,8 @@ extension ConvesationController: UITableViewDataSource{
     
     
 }
+
+
 extension ConvesationController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
