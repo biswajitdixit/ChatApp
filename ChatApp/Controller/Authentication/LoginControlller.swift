@@ -51,6 +51,7 @@ class LoginController:UIViewController{
         ]))
         
         button.setAttributedTitle(attributeTitle, for: .normal)
+        button.addTarget(self, action: #selector(handelShowSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -59,6 +60,13 @@ class LoginController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    
+    //Mark: - selector
+    @objc func handelShowSignUp(){
+        let controller = RegistrationController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     //Mark: - Helper
@@ -85,12 +93,4 @@ class LoginController:UIViewController{
         dontHaveAccountButton.anchor(left:view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingBottom: 16,  paddingRight: 32)
     }
     
-    
-    func configureGradiantLayer() {
-        let gradiant = CAGradientLayer()
-        gradiant.colors = [UIColor.systemPurple.cgColor, UIColor.systemPink.cgColor]
-        gradiant.locations = [0, 1]
-        view.layer.addSublayer(gradiant)
-        gradiant.frame = view.frame
-    }
 }
