@@ -1,4 +1,5 @@
 import UIKit
+import JGProgressHUD
 extension UIView {
     func anchor(top: NSLayoutYAxisAnchor? = nil,
                 left: NSLayoutXAxisAnchor? = nil,
@@ -72,11 +73,45 @@ extension UIView {
 }
 
 extension UIViewController{
+    
+    static let hud = JGProgressHUD(style: .dark)
+    
     func configureGradiantLayer() {
         let gradiant = CAGradientLayer()
         gradiant.colors = [UIColor.systemPurple.cgColor, UIColor.systemPink.cgColor]
         gradiant.locations = [0, 1]
         view.layer.addSublayer(gradiant)
         gradiant.frame = view.frame
+    }
+    
+    func showLoader(_ show: Bool, withText text: String? = "Loading"){
+        view.endEditing(true)
+      
+        UIViewController.hud.textLabel.text = text
+        
+        
+        if show {
+            UIViewController.hud.show(in: view)
+        }else{
+            UIViewController.hud.dismiss()
+        }
+    }
+    
+    func configureNavigationBar(withTitle title: String, prefersLargeTitles: Bool){
+        let apperance = UINavigationBarAppearance()
+        apperance.configureWithOpaqueBackground()
+        apperance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        apperance.backgroundColor = .systemPurple
+        
+        navigationController?.navigationBar.standardAppearance = apperance
+        navigationController?.navigationBar.compactAppearance = apperance
+        navigationController?.navigationBar.scrollEdgeAppearance = apperance
+        
+        navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+        navigationItem.title = title
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.isTranslucent = true
+        
+        
     }
 }

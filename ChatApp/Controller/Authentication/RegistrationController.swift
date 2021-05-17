@@ -93,46 +93,17 @@ class RegistrationController:UIViewController{
         guard let fullName = fullNameTextField.text else {return}
         guard let userName = userNameTextField.text?.lowercased() else {return}
         guard let profileImage = profileImage else {return}
+        let credential = RegistrationCredential(email: email, password: password, profileImage: profileImage, fullName: fullName, userName: userName)
+        showLoader(true,withText: "Signing You Up")
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {return}
-        
-        let fileName = NSUUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/profile_images/\(fileName)")
-        
-        ref.putData(imageData, metadata: nil) { (meta, error) in
+        AuthService.shared.createUserIn(credential: credential) { error in
             if let error = error {
                 print(error.localizedDescription)
+                self.showLoader(false)
                 return
             }
-            ref.downloadURL { (url, error) in
-                guard let profileImageUrl = url?.absoluteString else {return}
-                
-                
-                Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                    if let error = error{
-                        print(error.localizedDescription)
-                        return
-                    }
-                    
-                    guard let uid = result?.user.uid else{return}
-                    
-                    let data = ["email": email,
-                                "fullName": fullName,
-                                "profileImageUrl": profileImageUrl,
-                                "uid": uid,
-                                "userName":userName] as [String : Any]
-                    
-                    Firestore.firestore().collection("users").document(uid).setData(data) { error in
-                        if let error = error{
-                            print(error.localizedDescription)
-                            return
-                        }
-                       
-                        print("did create user")
-                    }
-                    
-                }
-            }
+            self.showLoader(false)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -148,6 +119,19 @@ class RegistrationController:UIViewController{
         }
        checkFormStatus()
     }
+    
+    @objc func keyboardWillShow(){
+        if view.frame.origin.y == 0{
+            self.view.frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keyboardWillHide(){
+        if view.frame.origin.y != 0{
+            view.frame.origin.y = 0
+        }
+    }
+    
     //Mark: - Helper
     
     
@@ -174,6 +158,9 @@ class RegistrationController:UIViewController{
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         fullNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         userNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
