@@ -12,6 +12,7 @@
 		841BA80A2651059F00276689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 841BA8092651059F00276689 /* GoogleService-Info.plist */; };
 		841BA827265169E100276689 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA826265169E100276689 /* AuthService.swift */; };
 		841BA82A2651880000276689 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8292651880000276689 /* NewMessageController.swift */; };
+		841BA82D2652388000276689 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA82C2652388000276689 /* UserCell.swift */; };
 		84633611264F8658007DA352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633610264F8658007DA352 /* AppDelegate.swift */; };
 		84633613264F8658007DA352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633612264F8658007DA352 /* SceneDelegate.swift */; };
 		84633615264F8658007DA352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633614264F8658007DA352 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		841BA8092651059F00276689 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		841BA826265169E100276689 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		841BA8292651880000276689 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		841BA82C2652388000276689 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8463360D264F8658007DA352 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84633610264F8658007DA352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84633612264F8658007DA352 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				8463363A264FAC56007DA352 /* InputContainerView.swift */,
 				8463363D264FB022007DA352 /* CustomTextField.swift */,
+				841BA82C2652388000276689 /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				841BA827265169E100276689 /* AuthService.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */,
+				841BA82D2652388000276689 /* UserCell.swift in Sources */,
 				84633631264F992E007DA352 /* LoginControlller.swift in Sources */,
 				84633635264F9943007DA352 /* RegistrationController.swift in Sources */,
 				84633613264F8658007DA352 /* SceneDelegate.swift in Sources */,
