@@ -84,7 +84,7 @@ extension UIViewController{
         gradiant.frame = view.frame
     }
     
-    func showLoader(_ show: Bool, withText text: String? = "Loading"){
+    func showLoader(_ show: Bool, withText text: String? = "Error in Loading"){
         view.endEditing(true)
       
         UIViewController.hud.textLabel.text = text

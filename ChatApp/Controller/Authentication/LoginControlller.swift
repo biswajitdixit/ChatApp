@@ -49,6 +49,14 @@ class LoginController:UIViewController{
         return txtFld
     }()
     
+    private let forgotPasswordButton:UIButton = {
+        let button = UIButton(type: .system)
+        let attributeTitle = NSMutableAttributedString(string: "Forgotten Password?",
+                                                       attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])
+        button.setAttributedTitle(attributeTitle, for: .normal)
+        button.addTarget(self, action: #selector(handelShowForgotPassword), for: .touchUpInside)
+        return button
+    }()
     private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributeTitle = NSMutableAttributedString(string: "Don't have an account?  ",
@@ -86,6 +94,7 @@ class LoginController:UIViewController{
        checkFormStatus()
     }
     
+   
     @objc func handelLogin(){
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
@@ -102,6 +111,11 @@ class LoginController:UIViewController{
         
 
     }
+    
+    @objc func handelShowForgotPassword(){
+        let controller = ForgottenPassword()
+        navigationController?.pushViewController(controller, animated: true)
+    }
     //Mark: - Helper
     
   
@@ -117,12 +131,14 @@ class LoginController:UIViewController{
         iconImage.anchor(top:view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         iconImage.setDimensions(height: 120, width: 120)
         
-        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton,forgotPasswordButton])
         stack.axis = .vertical
         stack.spacing = 16
         
         view.addSubview(stack)
         stack.anchor(top:iconImage.bottomAnchor, left: view.leftAnchor,right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        
+        
         
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.anchor(left:view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingBottom: 16,  paddingRight: 32)
