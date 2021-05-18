@@ -10,7 +10,7 @@ class ConvesationController:UIViewController{
     private let tableView = UITableView()
     private let messageButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "message"), for: .normal)
+        button.setImage(UIImage(systemName: "message.fill"), for: .normal)
         button.backgroundColor = .systemPurple
         button.tintColor = .white
         button.imageView?.setDimensions(height: 24, width: 24)
@@ -34,6 +34,7 @@ class ConvesationController:UIViewController{
     
     @objc func showNewMessages(){
         let controller = NewMessageController()
+        controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
@@ -95,6 +96,7 @@ class ConvesationController:UIViewController{
         
         view.addSubview(tableView)
         tableView.frame = view.frame
+//    tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         
     }
@@ -120,9 +122,19 @@ extension ConvesationController: UITableViewDataSource{
     
 }
 
-
+//Marks:-UItableViewDelegate
 extension ConvesationController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
     }
+}
+
+extension ConvesationController: NewMessageControllerDelegate {
+    func controller(_ controller: NewMessageController, wantToChatWith user: User) {
+        controller.dismiss(animated: true, completion: nil)
+        let chat = ChatController(user: user)
+        navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    
 }

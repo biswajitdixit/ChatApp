@@ -2,10 +2,15 @@ import UIKit
 
 private let reuseIdentifier = "UserCell"
 
+protocol NewMessageControllerDelegate: class {
+    func controller(_ controller: NewMessageController, wantToChatWith user: User)
+}
+
 class NewMessageController: UITableViewController {
     //Mark:- Properties
     
     private var users = [User]()
+    weak var delegate: NewMessageControllerDelegate?
     
     //Mark:- LifeCycle
     
@@ -57,9 +62,18 @@ extension NewMessageController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
         cell.user = users[indexPath.row]
-        print("index row is \(indexPath.row)")
-        print("User in array is \(users[indexPath.row].userName)")
         return cell
     }
     
 }
+
+//Marks:- UiTableViewDelegate
+
+extension NewMessageController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.controller(self, wantToChatWith: users[indexPath.row])
+        
+    }
+}
+
+

@@ -63,9 +63,6 @@ class ForgottenPassword:UIViewController{
     //Marks:- Helper
     
     func configureUI(){
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationBar.barStyle = .black
-        
         configureGradiantLayer()
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)
