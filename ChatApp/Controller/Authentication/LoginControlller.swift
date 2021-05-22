@@ -99,16 +99,17 @@ class LoginController:UIViewController{
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
         showLoader(true,withText: "Loggin in ")
-        AuthService.shared.logUserIn(withEmail: email, password: password) { (result, error) in
-            if let error = error {
-                print(error.localizedDescription)
+        Auth.auth().signIn(withEmail: email, password: password){  authResult, error in
+            if let e = error{
+                print(e.localizedDescription)
+                print("Person not yet Registered")
                 self.showLoader(false)
                 return
+                
             }
             self.showLoader(false)
             self.dismiss(animated: true, completion: nil)
         }
-        
 
     }
     

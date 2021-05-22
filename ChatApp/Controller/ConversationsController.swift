@@ -10,7 +10,7 @@ class ConvesationController:UIViewController{
     private let tableView = UITableView()
     private let messageButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "message.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "bubble.right.fill"), for: .normal)
         button.backgroundColor = .systemPurple
         button.tintColor = .white
         button.imageView?.setDimensions(height: 24, width: 24)

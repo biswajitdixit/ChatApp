@@ -42,7 +42,7 @@ class ChatController: UICollectionViewController {
     
     func configureUI(){
         collectionView.backgroundColor = .white
-        configureNavigationBar(withTitle: user.userName, prefersLargeTitles: false)
+        configureNavigationBar(withTitle: user.userName!, prefersLargeTitles: false)
     
     }
     

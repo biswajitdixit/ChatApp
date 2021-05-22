@@ -24,7 +24,7 @@ class UserCell: UITableViewCell{
     }()
     
     
-    private let fullNameLabel: UILabel = {
+     let fullNameLabel: UILabel = {
       let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
@@ -62,7 +62,7 @@ class UserCell: UITableViewCell{
         fullNameLabel.text = user.fullName
         userNameLabel.text = user.userName
      
-        guard let url = URL(string: user.profileImageUrl) else {return}
+        guard let url = URL(string: user.profileImageUrl!) else {return}
         profileImageView.sd_setImage(with: url)
         
     }

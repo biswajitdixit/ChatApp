@@ -10,7 +10,7 @@ target 'ChatApp' do
     pod 'Firebase/Core'
     pod 'Firebase/Storage'
     pod 'Firebase/Auth'
-    pod 'Firebase/Firestore'
+    pod 'Firebase/Database'
     pod 'SDWebImage' , '~>4.4.2'
     pod 'JGProgressHUD', '~>2.0.3'
 

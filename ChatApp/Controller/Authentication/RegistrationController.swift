@@ -1,5 +1,6 @@
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class RegistrationController:UIViewController{
     
@@ -93,19 +94,68 @@ class RegistrationController:UIViewController{
         guard let fullName = fullNameTextField.text else {return}
         guard let userName = userNameTextField.text?.lowercased() else {return}
         guard let profileImage = profileImage else {return}
-        let credential = RegistrationCredential(email: email, password: password, profileImage: profileImage, fullName: fullName, userName: userName)
-        showLoader(true,withText: "Signing You Up")
-        
-        AuthService.shared.createUserIn(credential: credential) { error in
+       showLoader(true,withText: "Signing You Up")
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
+            
             if let error = error {
-                print(error.localizedDescription)
+                print(error.localizedDescription )
+                return
+            }
+            
+            guard let uid = user?.user.uid else {
+                return
+            }
+            
+            
+            let imageName = UUID().uuidString
+            let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
+            
+            if let uploadData = profileImage.pngData() {
+                
+                storageRef.putData(uploadData, metadata: nil, completion: { (_, err) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    storageRef.downloadURL(completion: { (url, err) in
+                        if let err = err {
+                            print(err.localizedDescription)
+                            return
+                        }
+                        
+                        guard let url = url else { return }
+                        let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
+                        
+                        self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+                        
+                    })
+                    
+                })
+            }
+        })
+    }
+
+    fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+        let ref = Database.database().reference()
+        let usersReference = ref.child("users").child(uid)
+        
+        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if let err = err {
+                print(err.localizedDescription)
                 self.showLoader(false)
                 return
             }
+            
             self.showLoader(false)
             self.dismiss(animated: true, completion: nil)
-        }
+           
+        })
     }
+    
+    
     
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField {

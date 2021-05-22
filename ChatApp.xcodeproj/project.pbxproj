@@ -10,13 +10,12 @@
 		841BA8022650E02200276689 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8012650E02200276689 /* LoginViewModel.swift */; };
 		841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8042650E58400276689 /* RegistrationViewModel.swift */; };
 		841BA80A2651059F00276689 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 841BA8092651059F00276689 /* GoogleService-Info.plist */; };
-		841BA827265169E100276689 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA826265169E100276689 /* AuthService.swift */; };
 		841BA82A2651880000276689 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8292651880000276689 /* NewMessageController.swift */; };
 		841BA82D2652388000276689 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA82C2652388000276689 /* UserCell.swift */; };
-		841BA8302652404A00276689 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA82F2652404A00276689 /* User.swift */; };
 		841BA833265240FB00276689 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA832265240FB00276689 /* Service.swift */; };
 		841BA8362652450600276689 /* ForgottenPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8352652450600276689 /* ForgottenPassword.swift */; };
 		841BA839265249E700276689 /* ForgotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA838265249E700276689 /* ForgotViewModel.swift */; };
+		8453B80A2658E2A90015D833 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453B8092658E2A90015D833 /* User.swift */; };
 		84633611264F8658007DA352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633610264F8658007DA352 /* AppDelegate.swift */; };
 		84633613264F8658007DA352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633612264F8658007DA352 /* SceneDelegate.swift */; };
 		84633615264F8658007DA352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633614264F8658007DA352 /* ViewController.swift */; };
@@ -38,13 +37,12 @@
 		841BA8012650E02200276689 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		841BA8042650E58400276689 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		841BA8092651059F00276689 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		841BA826265169E100276689 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		841BA8292651880000276689 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		841BA82C2652388000276689 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
-		841BA82F2652404A00276689 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		841BA832265240FB00276689 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		841BA8352652450600276689 /* ForgottenPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPassword.swift; sourceTree = "<group>"; };
 		841BA838265249E700276689 /* ForgotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewModel.swift; sourceTree = "<group>"; };
+		8453B8092658E2A90015D833 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8463360D264F8658007DA352 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84633610264F8658007DA352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84633612264F8658007DA352 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,7 +183,7 @@
 		84633629264F8DAB007DA352 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				841BA82F2652404A00276689 /* User.swift */,
+				8453B8092658E2A90015D833 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,7 +191,6 @@
 		8463362A264F8DF3007DA352 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				841BA826265169E100276689 /* AuthService.swift */,
 				841BA832265240FB00276689 /* Service.swift */,
 			);
 			path = API;
@@ -327,13 +324,11 @@
 				84633615264F8658007DA352 /* ViewController.swift in Sources */,
 				841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */,
 				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
-				841BA827265169E100276689 /* AuthService.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				841BA8362652450600276689 /* ForgottenPassword.swift in Sources */,
 				8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */,
 				841BA82D2652388000276689 /* UserCell.swift in Sources */,
 				84633631264F992E007DA352 /* LoginControlller.swift in Sources */,
-				841BA8302652404A00276689 /* User.swift in Sources */,
 				841BA833265240FB00276689 /* Service.swift in Sources */,
 				84633635264F9943007DA352 /* RegistrationController.swift in Sources */,
 				84633613264F8658007DA352 /* SceneDelegate.swift in Sources */,
@@ -344,6 +339,7 @@
 				8463363E264FB022007DA352 /* CustomTextField.swift in Sources */,
 				84643474265399ED00850F3F /* CustomInputView.swift in Sources */,
 				841BA82A2651880000276689 /* NewMessageController.swift in Sources */,
+				8453B80A2658E2A90015D833 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
