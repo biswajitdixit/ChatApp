@@ -26,6 +26,14 @@ class ForgottenPassword:UIViewController{
         return button
     }()
     
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.addTarget(self, action: #selector(handelDismissal), for: .touchUpInside)
+        return button
+    }()
+    
     
     private lazy var emailContainerView: UIView = {
         return InputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
@@ -33,11 +41,16 @@ class ForgottenPassword:UIViewController{
     
     private let emailTextField = CustomTextField(placeholder: "Email")
     
+    
     //Marks:-LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
+    
+    
+    
     //Marks:- Selector
     
     @objc func handeForgotPassword(){
@@ -55,6 +68,7 @@ class ForgottenPassword:UIViewController{
             
         }
     }
+    
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField {
             viewModel.email = sender.text
@@ -62,11 +76,17 @@ class ForgottenPassword:UIViewController{
        checkFormStatus()
     }
     
+    @objc func handelDismissal(){
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     //Marks:- Helper
     
     func configureUI(){
         configureGradiantLayer()
+        view.addSubview(backButton)
+        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)
         iconImage.anchor(top:view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)

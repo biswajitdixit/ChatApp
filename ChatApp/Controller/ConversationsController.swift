@@ -96,7 +96,7 @@ class ConvesationController:UIViewController{
         
         view.addSubview(tableView)
         tableView.frame = view.frame
-//    tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+   tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         
     }
@@ -131,7 +131,7 @@ extension ConvesationController: UITableViewDelegate{
 
 extension ConvesationController: NewMessageControllerDelegate {
     func controller(_ controller: NewMessageController, wantToChatWith user: User) {
-        controller.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         let chat = ChatController(user: user)
         navigationController?.pushViewController(chat, animated: true)
     }

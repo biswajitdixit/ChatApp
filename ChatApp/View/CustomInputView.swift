@@ -20,7 +20,15 @@ class CustomInputView: UIView {
         button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
         return button
     } ()
-    
+    private let imageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "photo"), for: .normal)
+        button.tintColor = .systemPurple
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.systemPurple, for: .normal)
+        button.addTarget(self, action: #selector(handelPhotoMessage), for: .touchUpInside)
+      return button
+    }()
     private let placeHolderLabel: UILabel = {
        let label = UILabel()
         label.text = "Type a message"
@@ -44,8 +52,11 @@ class CustomInputView: UIView {
         sendButton.anchor(top: topAnchor, right: rightAnchor, paddingTop: 4, paddingRight: 8)
         sendButton.setDimensions(height: 50, width: 50)
         
+        addSubview(imageButton)
+        imageButton.anchor(top: topAnchor,bottom: safeAreaLayoutGuide.bottomAnchor,paddingTop:4, paddingLeft: 4)
+        imageButton.setDimensions(height: 50, width: 50)
         addSubview(messageInputTextView)
-        messageInputTextView.anchor(top: topAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: sendButton.leftAnchor, paddingTop: 12, paddingLeft: 4, paddingBottom:  8, paddingRight: 8)
+        messageInputTextView.anchor(top: topAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: sendButton.leftAnchor, paddingTop: 12, paddingLeft: 40, paddingBottom:  8, paddingRight: 8)
         
         addSubview(placeHolderLabel)
         placeHolderLabel.anchor(left:messageInputTextView.leftAnchor, paddingLeft: 4)
@@ -65,10 +76,14 @@ class CustomInputView: UIView {
     //Marks:- Selector
     
     @objc func handleSendMessage(){
-        print("send message")
+        print("send message \(messageInputTextView.text)")
     }
     
     @objc func handelTextInputChange(){
         placeHolderLabel.isHidden = !self.messageInputTextView.text.isEmpty
+    }
+    
+    @objc func handelPhotoMessage(){
+        
     }
 }

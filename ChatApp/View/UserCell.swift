@@ -24,7 +24,7 @@ class UserCell: UITableViewCell{
     }()
     
     
-     let fullNameLabel: UILabel = {
+    private let fullNameLabel: UILabel = {
       let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
@@ -67,3 +67,4 @@ class UserCell: UITableViewCell{
         
     }
 }
+
