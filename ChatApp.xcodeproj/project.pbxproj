@@ -30,6 +30,9 @@
 		8463363E264FB022007DA352 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463363D264FB022007DA352 /* CustomTextField.swift */; };
 		8464347126538E3D00850F3F /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464347026538E3D00850F3F /* ChatController.swift */; };
 		84643474265399ED00850F3F /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84643473265399ED00850F3F /* CustomInputView.swift */; };
+		84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C4F265A27B7006BF716 /* MessageCell.swift */; };
+		84D16C53265A3679006BF716 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C52265A3679006BF716 /* Message.swift */; };
+		84D16C56265A3BA3006BF716 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C55265A3BA3006BF716 /* MessageViewModel.swift */; };
 		F4DBB02829BE87D6D2BFE66F /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE710082ADA72DD840FCA5D /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,9 @@
 		8463363D264FB022007DA352 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		8464347026538E3D00850F3F /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		84643473265399ED00850F3F /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		84D16C4F265A27B7006BF716 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		84D16C52265A3679006BF716 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		84D16C55265A3BA3006BF716 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		C16B4160A349ACC9989EFBB3 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		EDE710082ADA72DD840FCA5D /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1B20A018FE01055E993BA02 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,10 +137,10 @@
 				8463362A264F8DF3007DA352 /* API */,
 				84633625264F8D97007DA352 /* Utils */,
 				84633610264F8658007DA352 /* AppDelegate.swift */,
-				84633612264F8658007DA352 /* SceneDelegate.swift */,
-				84633614264F8658007DA352 /* ViewController.swift */,
 				84633616264F8658007DA352 /* Main.storyboard */,
+				84633614264F8658007DA352 /* ViewController.swift */,
 				84633619264F865A007DA352 /* Assets.xcassets */,
+				84633612264F8658007DA352 /* SceneDelegate.swift */,
 				8463361B264F865A007DA352 /* LaunchScreen.storyboard */,
 				841BA8092651059F00276689 /* GoogleService-Info.plist */,
 				8463361E264F865A007DA352 /* Info.plist */,
@@ -165,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				841BA8072650EAEA00276689 /* Authentication */,
+				84D16C55265A3BA3006BF716 /* MessageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 				8463363D264FB022007DA352 /* CustomTextField.swift */,
 				841BA82C2652388000276689 /* UserCell.swift */,
 				84643473265399ED00850F3F /* CustomInputView.swift */,
+				84D16C4F265A27B7006BF716 /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				8453B8092658E2A90015D833 /* User.swift */,
+				84D16C52265A3679006BF716 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,11 +330,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D16C56265A3BA3006BF716 /* MessageViewModel.swift in Sources */,
 				84633615264F8658007DA352 /* ViewController.swift in Sources */,
+				84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */,
 				841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */,
 				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				841BA8362652450600276689 /* ForgottenPassword.swift in Sources */,
+				84D16C53265A3679006BF716 /* Message.swift in Sources */,
 				8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */,
 				841BA82D2652388000276689 /* UserCell.swift in Sources */,
 				84633631264F992E007DA352 /* LoginControlller.swift in Sources */,

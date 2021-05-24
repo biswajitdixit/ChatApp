@@ -20,4 +20,35 @@ struct Service {
             }
         },withCancel: nil)
     }
+    
+    static func sendMessage(inputTextField:String, id:String , completion: @escaping ((Error?, DatabaseReference) -> Void)){
+        if !inputTextField.isEmpty{
+        let ref = Database.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        let toId = id
+        let fromId = Auth.auth().currentUser!.uid
+        let timestamp = Int(Date().timeIntervalSince1970)
+        let values = ["text": inputTextField, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+        
+        childRef.updateChildValues(values,withCompletionBlock: completion )
+        }}
+    
+    static func senderReciptanatMessage( messageId:String, toId: String) {
+        let fromId = Auth.auth().currentUser!.uid
+        let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(toId).child(messageId)
+        userMessagesRef.setValue(1)
+        
+        let recipientUserMessagesRef = Database.database().reference().child("user-messages").child(toId).child(fromId).child(messageId)
+        recipientUserMessagesRef.setValue(1)
+    }
+    
+    static func observeMessages(forUser user:User,completion:@escaping ((DataSnapshot) -> Void)) {
+        guard let uid = Auth.auth().currentUser?.uid, let toId = user.id  else {
+            return
+        }
+        let userMessagesRef = Database.database().reference().child("user-messages").child(uid).child(toId)
+        userMessagesRef.observe(.childAdded, with: completion)
+    }
+    
+    
 }

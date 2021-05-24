@@ -100,8 +100,6 @@ class ConvesationController:UIViewController{
         
         
     }
-    
-    
    
 }
 
