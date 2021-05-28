@@ -37,12 +37,15 @@ class NewMessageController: UITableViewController {
     //Marks:- Api
     
     func fetchUsers(){
+        showLoader(true,withText: "Loading users")
         Service.fetchUser { users in
+            self.showLoader(false,withText: "user loaded")
             self.users = users
             self.tableView.reloadData()
             
             print("in new message \(users)")
         }
+        
     }
     //Marks:- Helpers
     

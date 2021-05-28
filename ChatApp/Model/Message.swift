@@ -10,6 +10,11 @@ class Message:NSObject {
     var timeStamp: NSNumber?
     var toId:String?
     var user:User?
+    var imageUrl: String?
+    var imageWidth: NSNumber?
+    var imageHeight: NSNumber?
+    
+    
 
     let isFromCurrentUser: Bool
 
@@ -18,7 +23,11 @@ class Message:NSObject {
         self.text = dictionary["text"] as? String
         self.toId = dictionary["toId"] as? String
         self.timeStamp = dictionary["timestamp"] as? NSNumber
-
+        self.imageUrl = dictionary["imageUrl"] as? String
+        
+        self.imageWidth = dictionary["imageWidth"] as? NSNumber
+        self.imageHeight = dictionary["imageHeight"] as? NSNumber
+        
         self.isFromCurrentUser = fromId == Auth.auth().currentUser?.uid
     }
     func chatPartnerId() -> String? {
