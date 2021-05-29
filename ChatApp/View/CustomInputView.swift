@@ -6,6 +6,7 @@ protocol CustomInputAccessoryViewDelegate: class {
 protocol  ImageViewDelegate: class {
     func inputImage()
 }
+
 class CustomInputView: UIView {
     
     //Marks:- Properties

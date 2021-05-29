@@ -1,9 +1,10 @@
 import UIKit
 import Firebase
 import SDWebImage
+
 private let reuseIdentifier = "MessageCell"
 class ChatController: UICollectionViewController {
-    
+   
     //Marks:- Properties
     
     private let user:User
@@ -31,6 +32,7 @@ class ChatController: UICollectionViewController {
         super.viewDidLoad()
         configureUI()
         fetchMessages()
+        
     }
     
     override var inputAccessoryView: UIView? { 
@@ -54,8 +56,11 @@ class ChatController: UICollectionViewController {
                     return
                 }
                 self.messages.append(Message(dictionary: dictionary))
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: [0, self.messages.count - 1], at: .bottom, animated: true)
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                    self.collectionView.scrollToItem(at: [0, self.messages.count - 1], at: .bottom, animated: true)
+                })
+                
                 })
 
             }
@@ -68,6 +73,7 @@ class ChatController: UICollectionViewController {
         configureNavigationBar(withTitle: user.userName!, prefersLargeTitles: false)
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.alwaysBounceVertical = true
+        
     
     }
     
@@ -81,6 +87,7 @@ extension ChatController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MessageCell
+        cell.zoomDelegate = self
         cell.message = messages[indexPath.row]
         cell.message?.user = user
         let messageImageUrl = cell.message?.imageUrl ?? ""
@@ -116,6 +123,10 @@ extension ChatController : UICollectionViewDelegateFlowLayout {
         let width = UIScreen.main.bounds.width
         return CGSize(width: width, height: height)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 }
 
 
@@ -137,6 +148,7 @@ extension ChatController: CustomInputAccessoryViewDelegate , ImageViewDelegate, 
     
     func inputImage() {
         handleUploadTap()
+        
     }
     
      func handleUploadTap() {
@@ -183,4 +195,10 @@ extension ChatController: CustomInputAccessoryViewDelegate , ImageViewDelegate, 
     
 }
 
-
+extension ChatController:ImageZoomDelegate {
+    func customView(alphaValue: Int) {
+        customInputView.alpha = CGFloat(alphaValue)
+    }
+    
+    
+}

@@ -31,7 +31,10 @@ struct Service {
         let values = ["text": inputTextField, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
         
         childRef.updateChildValues(values,withCompletionBlock: completion )
+        
         }
+    
+    
     static func sendImage(_ imageUrl: String,image: UIImage, id:String,completion: @escaping ((Error?, DatabaseReference) -> Void)){
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
@@ -43,6 +46,7 @@ struct Service {
         childRef.updateChildValues(values,withCompletionBlock: completion )
         
     }
+    
     static func senderReciptanatMessage( messageId:String, toId: String) {
         let fromId = Auth.auth().currentUser!.uid
         let userMessagesRef = Database.database().reference().child("user-messages").child(fromId).child(toId).child(messageId)
