@@ -1,9 +1,9 @@
 import UIKit
 
-
 protocol ImageZoomDelegate:class {
     func customView(alphaValue:Int)
 }
+
 class MessageCell: UICollectionViewCell {
     
     //Mark:- Properties

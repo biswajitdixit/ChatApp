@@ -5,7 +5,7 @@ import FirebaseDatabase
 
 struct Service {
     
-    static func fetchUser(Completion: @escaping ([User]) -> Void){
+    static func fetchUsers(Completion: @escaping ([User]) -> Void){
         var users = [User]()
         Database.database().reference().child("users").observe(.childAdded, with : {
             (snapshot) in
@@ -22,6 +22,14 @@ struct Service {
         },withCancel: nil)
     }
     
+    static func getUser(withUid uid:String, Completion: @escaping (User) ->Void){
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                let user = User(dictionary: dictionary)
+                Completion(user)
+            }
+        })
+    }
     static func sendMessage(inputTextField:String, id:String , completion: @escaping ((Error?, DatabaseReference) -> Void)){
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()

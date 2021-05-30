@@ -29,7 +29,12 @@ class ConvesationController:UIViewController{
     
     //Marks:- Selector
     @objc func showProfile(){
-       logOut()
+       let controller = ProfileController()
+        controller.delegate = self
+       let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+       present(nav, animated: true, completion: nil)
+        
     }
     
     @objc func showNewMessages(){
@@ -50,15 +55,6 @@ class ConvesationController:UIViewController{
         }
     }
     
-    func logOut(){
-        do{
-            try Auth.auth().signOut()
-            presentLoginScreen()
-            print("logout successFully")
-        }catch {
-            print("Error in signOut")
-        }
-    }
     
     //Marks: -Helper
     
@@ -131,6 +127,20 @@ extension ConvesationController: NewMessageControllerDelegate {
         dismiss(animated: true, completion: nil)
         let chat = ChatController(user: user)
         navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    
+}
+
+extension ConvesationController: ProfileControllerDelegate {
+    func handelSignOut() {
+        do{
+            try Auth.auth().signOut()
+            presentLoginScreen()
+            print("logout successFully")
+        }catch {
+            print("Error in signOut")
+        }
     }
     
     

@@ -31,6 +31,11 @@
 		8463363E264FB022007DA352 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8463363D264FB022007DA352 /* CustomTextField.swift */; };
 		8464347126538E3D00850F3F /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464347026538E3D00850F3F /* ChatController.swift */; };
 		84643474265399ED00850F3F /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84643473265399ED00850F3F /* CustomInputView.swift */; };
+		84669CBB26638309008D6BF3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CBA26638309008D6BF3 /* ProfileViewModel.swift */; };
+		84669CBE26638583008D6BF3 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CBD26638583008D6BF3 /* ProfileCell.swift */; };
+		84669CC126639076008D6BF3 /* ProfileLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CC026639076008D6BF3 /* ProfileLogout.swift */; };
+		8488DA1C266292EC00F99DB6 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488DA1B266292EC00F99DB6 /* ProfileController.swift */; };
+		8488DA1F2662951E00F99DB6 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488DA1E2662951E00F99DB6 /* Profile.swift */; };
 		84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C4F265A27B7006BF716 /* MessageCell.swift */; };
 		84D16C53265A3679006BF716 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C52265A3679006BF716 /* Message.swift */; };
 		84D16C56265A3BA3006BF716 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C55265A3BA3006BF716 /* MessageViewModel.swift */; };
@@ -64,6 +69,11 @@
 		8463363D264FB022007DA352 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		8464347026538E3D00850F3F /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; tabWidth = 5; };
 		84643473265399ED00850F3F /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		84669CBA26638309008D6BF3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		84669CBD26638583008D6BF3 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		84669CC026639076008D6BF3 /* ProfileLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogout.swift; sourceTree = "<group>"; };
+		8488DA1B266292EC00F99DB6 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		8488DA1E2662951E00F99DB6 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		84D16C4F265A27B7006BF716 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		84D16C52265A3679006BF716 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		84D16C55265A3BA3006BF716 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -166,6 +176,7 @@
 				8463362B264F8E35007DA352 /* ConversationsController.swift */,
 				841BA8292651880000276689 /* NewMessageController.swift */,
 				8464347026538E3D00850F3F /* ChatController.swift */,
+				8488DA1B266292EC00F99DB6 /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -175,6 +186,7 @@
 			children = (
 				841BA8072650EAEA00276689 /* Authentication */,
 				84D16C55265A3BA3006BF716 /* MessageViewModel.swift */,
+				84669CBA26638309008D6BF3 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -187,6 +199,9 @@
 				841BA82C2652388000276689 /* UserCell.swift */,
 				84643473265399ED00850F3F /* CustomInputView.swift */,
 				84D16C4F265A27B7006BF716 /* MessageCell.swift */,
+				8488DA1E2662951E00F99DB6 /* Profile.swift */,
+				84669CBD26638583008D6BF3 /* ProfileCell.swift */,
+				84669CC026639076008D6BF3 /* ProfileLogout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -339,23 +354,28 @@
 				841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */,
 				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
 				8451546F265BB3E300CCD67A /* SendButtonViewModel.swift in Sources */,
+				84669CBE26638583008D6BF3 /* ProfileCell.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				841BA8362652450600276689 /* ForgottenPassword.swift in Sources */,
 				84D16C53265A3679006BF716 /* Message.swift in Sources */,
 				8463362C264F8E35007DA352 /* ConversationsController.swift in Sources */,
+				84669CBB26638309008D6BF3 /* ProfileViewModel.swift in Sources */,
 				841BA82D2652388000276689 /* UserCell.swift in Sources */,
 				84633631264F992E007DA352 /* LoginControlller.swift in Sources */,
 				841BA833265240FB00276689 /* Service.swift in Sources */,
 				84633635264F9943007DA352 /* RegistrationController.swift in Sources */,
 				84633613264F8658007DA352 /* SceneDelegate.swift in Sources */,
 				8464347126538E3D00850F3F /* ChatController.swift in Sources */,
+				8488DA1F2662951E00F99DB6 /* Profile.swift in Sources */,
 				841BA839265249E700276689 /* ForgotViewModel.swift in Sources */,
 				84633638264F9E1F007DA352 /* Extensions.swift in Sources */,
 				841BA8022650E02200276689 /* LoginViewModel.swift in Sources */,
 				8463363E264FB022007DA352 /* CustomTextField.swift in Sources */,
 				84643474265399ED00850F3F /* CustomInputView.swift in Sources */,
 				841BA82A2651880000276689 /* NewMessageController.swift in Sources */,
+				84669CC126639076008D6BF3 /* ProfileLogout.swift in Sources */,
 				8453B80A2658E2A90015D833 /* User.swift in Sources */,
+				8488DA1C266292EC00F99DB6 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
