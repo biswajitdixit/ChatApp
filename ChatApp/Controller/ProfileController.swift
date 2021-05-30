@@ -50,6 +50,7 @@ class ProfileController: UITableViewController {
         tableView.tableHeaderView = headerView
         headerView.delegate = self
         headerView.imageDelegate = self
+        headerView.userNameDelegate = self
         tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifer)
         tableView.tableFooterView = UIView()
         tableView.contentInsetAdjustmentBehavior = .never
@@ -158,4 +159,33 @@ extension ProfileController: ProfileFotterDelegate {
         
         present(alert, animated: true, completion: nil)
     }
+}
+
+extension ProfileController: EditUserNameDelegate{
+    func editUsername() {
+        var txtField = UITextField()
+       
+        let alert = UIAlertController(title: "Edit UserName", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "User Name"
+            alertTextField.text = self.headerView.userNamelabel.text
+            txtField = alertTextField
+        }
+        let action = UIAlertAction(title: "Edit", style: .default) { (action) in
+            self.updateUserName(userName:txtField.text!)
+            self.headerView.userNamelabel.text = txtField.text
+             print("Edited")
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func updateUserName(userName:String){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let values = ["userName": userName]
+        self.updteInDatabase(uid, values: values as [String : AnyObject])
+    }
+    
 }

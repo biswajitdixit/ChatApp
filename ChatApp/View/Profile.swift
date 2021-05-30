@@ -7,7 +7,9 @@ protocol ProfileDelegate:class {
 protocol EditProfileImage:class {
     func editProfileImage()
 }
-
+protocol EditUserNameDelegate:class {
+    func editUsername()
+}
 class Profile: UIView{
 
     //Marks:- Properties
@@ -17,6 +19,7 @@ class Profile: UIView{
     
     weak var delegate: ProfileDelegate?
     weak var imageDelegate: EditProfileImage?
+    weak var userNameDelegate: EditUserNameDelegate?
     
     private let dismissButton: UIButton = {
         let button = UIButton(type: .system)
@@ -57,13 +60,23 @@ class Profile: UIView{
         
     }()
     
-    private let userNamelabel: UILabel = {
+    var userNamelabel: UILabel = {
         let label = UILabel()
         label.font =  UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
         label.textAlignment = .center
         return label
         
+    }()
+    
+    private let editUserName: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "edit"), for: .normal)
+        button.backgroundColor = .systemPurple
+        button.tintColor = .white
+        button.imageView?.setDimensions(height: 15 , width: 15)
+        button.addTarget(self, action: #selector(edituserName), for: .touchUpInside)
+        return button
     }()
     
     //Marks:- Lifecycle
@@ -89,13 +102,16 @@ class Profile: UIView{
         imageDelegate?.editProfileImage()
     }
     
+    @objc func edituserName(){
+        userNameDelegate?.editUsername()
+    }
     //Marks: - Helpers
     
     func populateUserData(){
         guard let user = user else {return}
         
         fullNameLabel.text = user.fullName
-        userNamelabel.text = "@" + user.userName!
+        userNamelabel.text = user.userName!
         guard let url = URL(string: user.profileImageUrl ?? "") else {return}
         profileImageView.sd_setImage(with: url)
     }
@@ -113,14 +129,19 @@ class Profile: UIView{
         
         addSubview(editProfileImage)
         editProfileImage.anchor(bottom: bottomAnchor, right: profileImageView.rightAnchor, paddingBottom: 80)
+      
         
         let stack = UIStackView(arrangedSubviews: [fullNameLabel, userNamelabel])
         stack.axis = .vertical
         stack.spacing = 4
-        
         addSubview(stack)
         stack.centerX(inView: self)
         stack.anchor(top: profileImageView.bottomAnchor, paddingTop: 16)
+        
+        addSubview(editUserName)
+        editUserName.anchor( bottom:bottomAnchor,right:userNamelabel.rightAnchor, paddingLeft: 15, paddingBottom: 20)
+        editUserName.setDimensions(height: 20 , width: 20)
+        editUserName.layer.cornerRadius = 20/2
         
         addSubview(dismissButton)
         dismissButton.anchor(top: topAnchor, left: leftAnchor, paddingTop: 44, paddingLeft: 12)

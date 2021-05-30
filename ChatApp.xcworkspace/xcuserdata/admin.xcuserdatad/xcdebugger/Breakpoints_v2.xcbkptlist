@@ -1006,8 +1006,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "configureUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1353,8 +1353,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "editProfileImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1369,8 +1369,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "editProfileImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1385,8 +1385,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "editProfileImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1401,8 +1401,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "editProfileImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1417,8 +1417,8 @@
             filePath = "ChatApp/View/Profile.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "editImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1449,8 +1449,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "updateImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1465,8 +1465,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "updteInDatabase(_:values:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1475,38 +1475,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D26F9595-88D7-4FE9-87F3-C2A9682F4DE0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatApp/Controller/ProfileController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "updateImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CAEB1D18-8EAE-40E9-B7A5-8C788C1CCCFA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatApp/Controller/ProfileController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "updateImage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "50295C7E-5BD9-42A4-8B6E-63D2E09519D4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1522,6 +1490,38 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CAEB1D18-8EAE-40E9-B7A5-8C788C1CCCFA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatApp/Controller/ProfileController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "updateImage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50295C7E-5BD9-42A4-8B6E-63D2E09519D4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatApp/Controller/ProfileController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "updateImage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "4B615ACA-C168-40E6-A9E9-F8A6363DFA6E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1529,8 +1529,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "updateImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1545,8 +1545,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "updateImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1561,8 +1561,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "updateImage()"
             landmarkType = "7">
             <Locations>
@@ -1609,8 +1609,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "ProfileController"
             landmarkType = "21">
          </BreakpointContent>
@@ -1641,8 +1641,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1657,8 +1657,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "updateImage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1673,8 +1673,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "updteInDatabase(_:values:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1689,8 +1689,8 @@
             filePath = "ChatApp/Controller/ProfileController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "updateImage()"
             landmarkType = "7">
          </BreakpointContent>
