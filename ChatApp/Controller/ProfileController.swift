@@ -1,6 +1,5 @@
 
 import UIKit
-import Firebase
 
 private let reuseIdentifer = "ProfileCell"
 
@@ -37,7 +36,7 @@ class ProfileController: UITableViewController {
     
     //Marks:- API
     func fetchUser(){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let uid = Service.currentUser()
         Service.getUser(withUid: uid) { user in
             self.user = user
         }
@@ -102,48 +101,19 @@ extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerCo
     }
     
     func updateImage(){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        let imageName = UUID().uuidString
-        let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-        
-        if let uploadData = headerView.profileImageView.image?.pngData() {
-            
-            storageRef.putData(uploadData, metadata: nil, completion: { (_, error) in
-                
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                storageRef.downloadURL(completion: { (url, err) in
-                    if let err = err {
-                        print(err.localizedDescription)
-                        return
-                    }
-                    
-                    guard let url = url else { return }
-                    let values = ["profileImageUrl": url.absoluteString]
-                    self.updteInDatabase(uid, values: values as [String : AnyObject])
-                })
-                
-            })
-        }
-       
-    }
-    fileprivate func updteInDatabase(_ uid: String, values: [String: AnyObject]) {
-        let ref = Database.database().reference()
-        let usersReference = ref.child("users").child(uid)
-        
-        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-            
-            if let err = err {
-                print(err.localizedDescription)
-
+        let uid = Service.currentUser()
+        Service.uploadImage(profileImage: headerView.profileImageView.image!, completion: { (url, error) in
+            if let error = error {
+                print(error.localizedDescription)
                 return
             }
-           
+
+            guard let url = url else { return }
+            let values = ["profileImageUrl": url.absoluteString]
+            Service.updteInDatabase(uid, values: values as [String : AnyObject])
+            
         })
-    }
+     }
     
 }
 
@@ -177,15 +147,16 @@ extension ProfileController: EditUserNameDelegate{
             self.headerView.userNamelabel.text = txtField.text
              print("Edited")
         }
-        
+        let action1 = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         alert.addAction(action)
+        alert.addAction(action1)
         present(alert, animated: true, completion: nil)
     }
     
     func updateUserName(userName:String){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let uid = Service.currentUser()
         let values = ["userName": userName]
-        self.updteInDatabase(uid, values: values as [String : AnyObject])
+        Service.updteInDatabase(uid, values: values as [String : AnyObject])
     }
     
 }

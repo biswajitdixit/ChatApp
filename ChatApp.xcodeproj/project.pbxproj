@@ -19,7 +19,6 @@
 		8453B80A2658E2A90015D833 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453B8092658E2A90015D833 /* User.swift */; };
 		84633611264F8658007DA352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633610264F8658007DA352 /* AppDelegate.swift */; };
 		84633613264F8658007DA352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633612264F8658007DA352 /* SceneDelegate.swift */; };
-		84633615264F8658007DA352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633614264F8658007DA352 /* ViewController.swift */; };
 		84633618264F8658007DA352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84633616264F8658007DA352 /* Main.storyboard */; };
 		8463361A264F865A007DA352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84633619264F865A007DA352 /* Assets.xcassets */; };
 		8463361D264F865A007DA352 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8463361B264F865A007DA352 /* LaunchScreen.storyboard */; };
@@ -34,6 +33,8 @@
 		84669CBB26638309008D6BF3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CBA26638309008D6BF3 /* ProfileViewModel.swift */; };
 		84669CBE26638583008D6BF3 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CBD26638583008D6BF3 /* ProfileCell.swift */; };
 		84669CC126639076008D6BF3 /* ProfileLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84669CC026639076008D6BF3 /* ProfileLogout.swift */; };
+		8468FE5F2665F11D00176CDF /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FE5E2665F11D00176CDF /* ConversationCell.swift */; };
+		8468FE662665F18900176CDF /* ConversationviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FE652665F18900176CDF /* ConversationviewModel.swift */; };
 		8488DA1C266292EC00F99DB6 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488DA1B266292EC00F99DB6 /* ProfileController.swift */; };
 		8488DA1F2662951E00F99DB6 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488DA1E2662951E00F99DB6 /* Profile.swift */; };
 		84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D16C4F265A27B7006BF716 /* MessageCell.swift */; };
@@ -56,7 +57,6 @@
 		8463360D264F8658007DA352 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84633610264F8658007DA352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84633612264F8658007DA352 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		84633614264F8658007DA352 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84633617264F8658007DA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84633619264F865A007DA352 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8463361C264F865A007DA352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +72,8 @@
 		84669CBA26638309008D6BF3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		84669CBD26638583008D6BF3 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		84669CC026639076008D6BF3 /* ProfileLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogout.swift; sourceTree = "<group>"; };
+		8468FE5E2665F11D00176CDF /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		8468FE652665F18900176CDF /* ConversationviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationviewModel.swift; sourceTree = "<group>"; };
 		8488DA1B266292EC00F99DB6 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		8488DA1E2662951E00F99DB6 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		84D16C4F265A27B7006BF716 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -151,7 +153,6 @@
 				84633625264F8D97007DA352 /* Utils */,
 				84633610264F8658007DA352 /* AppDelegate.swift */,
 				84633616264F8658007DA352 /* Main.storyboard */,
-				84633614264F8658007DA352 /* ViewController.swift */,
 				84633619264F865A007DA352 /* Assets.xcassets */,
 				84633612264F8658007DA352 /* SceneDelegate.swift */,
 				8463361B264F865A007DA352 /* LaunchScreen.storyboard */,
@@ -187,6 +188,7 @@
 				841BA8072650EAEA00276689 /* Authentication */,
 				84D16C55265A3BA3006BF716 /* MessageViewModel.swift */,
 				84669CBA26638309008D6BF3 /* ProfileViewModel.swift */,
+				8468FE652665F18900176CDF /* ConversationviewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -202,6 +204,7 @@
 				8488DA1E2662951E00F99DB6 /* Profile.swift */,
 				84669CBD26638583008D6BF3 /* ProfileCell.swift */,
 				84669CC026639076008D6BF3 /* ProfileLogout.swift */,
+				8468FE5E2665F11D00176CDF /* ConversationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -349,11 +352,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D16C56265A3BA3006BF716 /* MessageViewModel.swift in Sources */,
-				84633615264F8658007DA352 /* ViewController.swift in Sources */,
 				84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */,
 				841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */,
 				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
 				8451546F265BB3E300CCD67A /* SendButtonViewModel.swift in Sources */,
+				8468FE662665F18900176CDF /* ConversationviewModel.swift in Sources */,
 				84669CBE26638583008D6BF3 /* ProfileCell.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,
 				841BA8362652450600276689 /* ForgottenPassword.swift in Sources */,
@@ -369,6 +372,7 @@
 				8488DA1F2662951E00F99DB6 /* Profile.swift in Sources */,
 				841BA839265249E700276689 /* ForgotViewModel.swift in Sources */,
 				84633638264F9E1F007DA352 /* Extensions.swift in Sources */,
+				8468FE5F2665F11D00176CDF /* ConversationCell.swift in Sources */,
 				841BA8022650E02200276689 /* LoginViewModel.swift in Sources */,
 				8463363E264FB022007DA352 /* CustomTextField.swift in Sources */,
 				84643474265399ED00850F3F /* CustomInputView.swift in Sources */,

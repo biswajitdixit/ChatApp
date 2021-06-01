@@ -1,6 +1,6 @@
 import UIKit
-import Firebase
-import JGProgressHUD
+
+
 
 protocol AuthenticationControllerProtocol {
     func checkFormStatus()
@@ -57,6 +57,7 @@ class LoginController:UIViewController{
         button.addTarget(self, action: #selector(handelShowForgotPassword), for: .touchUpInside)
         return button
     }()
+    
     private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributeTitle = NSMutableAttributedString(string: "Don't have an account?  ",
@@ -78,8 +79,8 @@ class LoginController:UIViewController{
         configureUI()
     }
     
-    
     //Mark: - selector
+    
     @objc func handelShowSignUp(){
         let controller = RegistrationController()
         navigationController?.pushViewController(controller, animated: true)
@@ -99,17 +100,18 @@ class LoginController:UIViewController{
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
         showLoader(true,withText: "Loggin in ")
-        Auth.auth().signIn(withEmail: email, password: password){  authResult, error in
-            if let e = error{
-                print(e.localizedDescription)
-                print("Person not yet Registered")
-                self.showLoader(false)
-                return
-                
-            }
-            self.showLoader(false)
-            self.dismiss(animated: true, completion: nil)
-        }
+        Service.Login(email: email, password: password, {
+            authResult, error in
+               if let e = error{
+                   print(e.localizedDescription)
+                   print("Person not yet Registered")
+                   self.showLoader(false)
+                   return
+                   
+               }
+               self.showLoader(false)
+               self.dismiss(animated: true, completion: nil)
+           })
 
     }
     
@@ -118,9 +120,7 @@ class LoginController:UIViewController{
         navigationController?.pushViewController(controller, animated: true)
     }
     //Mark: - Helper
-    
-  
-    
+
     func configureUI(){
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black

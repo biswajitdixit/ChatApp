@@ -3,6 +3,25 @@ import UIKit
 import Firebase
 
 private let reuseIdentifier = "ConversationCell"
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
 
 class ConvesationController:UIViewController{
    
@@ -18,6 +37,10 @@ class ConvesationController:UIViewController{
         return button
     }()
     
+    var messages = [Message]()
+    var messagesDictionary = [String: Message]()
+    var timer: Timer?
+
     //Marks: - Lifecycle
     
     override func viewDidLoad() {
@@ -45,6 +68,17 @@ class ConvesationController:UIViewController{
         present(nav, animated: true, completion: nil)
     }
     
+    @objc func handleReloadTable() {
+        self.messages = Array(self.messagesDictionary.values)
+        self.messages.sort(by: { (message1, message2) -> Bool in
+
+            return message1.timeStamp?.int32Value > message2.timeStamp?.int32Value
+        })
+        DispatchQueue.main.async(execute: {
+            self.tableView.reloadData()
+        })
+    }
+
     //Marks:- API
     func authenticationUser() {
         if Auth.auth().currentUser?.uid == nil{
@@ -54,7 +88,28 @@ class ConvesationController:UIViewController{
             print("user id id \(Auth.auth().currentUser?.uid)")
         }
     }
-    
+    func observeUserMessages() {
+        Service.currentMessage { (snapshot) in
+            let messageId = snapshot.key
+            self.fetchMessageWithMessageId(messageId)
+        }
+        
+    }
+
+    func fetchMessageWithMessageId(_ messageId: String) {
+        Service.currentMessagewithId(messageId) { snapshot in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+               let message = Message(dictionary: dictionary)
+                
+               if let chatPartnerId = message.chatPartnerId() {
+                 self.messagesDictionary[chatPartnerId] = message
+                }
+                self.attemptReloadOfTable()
+            }
+                
+       }
+        
+    }
     
     //Marks: -Helper
     
@@ -71,6 +126,11 @@ class ConvesationController:UIViewController{
         view.backgroundColor = .white
         configureNavigationBar(withTitle: "Messages", prefersLargeTitles: true)
         configureTableView()
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        
+        observeUserMessages()
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showProfile))
         
@@ -84,7 +144,7 @@ class ConvesationController:UIViewController{
     func configureTableView(){
         tableView.backgroundColor = .white
         tableView.rowHeight = 80
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -95,6 +155,11 @@ class ConvesationController:UIViewController{
    tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
     }
+    func attemptReloadOfTable() {
+        self.timer?.invalidate()
+
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
    
 }
 
@@ -102,15 +167,21 @@ class ConvesationController:UIViewController{
 
 extension ConvesationController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return messages.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "Test Cell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ConversationCell
+        let message = messages[indexPath.row]
+        cell.conversation = message
+        if cell.messageTextLabel.text == nil {
+            cell.messageTextLabel.text = "Media"
+        }
+        
         return cell
     }
+   
     
     
 }
@@ -119,8 +190,31 @@ extension ConvesationController: UITableViewDataSource{
 extension ConvesationController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+            let message = messages[indexPath.row]
+            
+            guard let chatPartnerId = message.chatPartnerId() else {
+                return
+            }
+            
+            let ref = Database.database().reference().child("users").child(chatPartnerId)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String: AnyObject] else {
+                    return
+                }
+                
+                let user = User(dictionary: dictionary)
+                user.id = chatPartnerId
+                self.showChatController(user)
+                
+                }, withCancel: nil)
+        }
+    
+    func showChatController(_ user: User){
+        let chatLogController = ChatController(user: user)
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
 }
+
 
 extension ConvesationController: NewMessageControllerDelegate {
     func controller(_ controller: NewMessageController, wantToChatWith user: User) {

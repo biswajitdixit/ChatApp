@@ -1,5 +1,4 @@
 import UIKit
-import Firebase
 
 class ForgottenPassword:UIViewController{
     
@@ -49,6 +48,9 @@ class ForgottenPassword:UIViewController{
         configureUI()
     }
     
+    override func viewWillLayoutSubviews() {
+        configureUI()
+    }
     
     
     //Marks:- Selector
@@ -56,7 +58,7 @@ class ForgottenPassword:UIViewController{
     @objc func handeForgotPassword(){
         guard let email = emailTextField.text else{return}
         showLoader(true,withText: "Sending Link")
-        Auth.auth().sendPasswordReset(withEmail: email){ (error) in
+        Service.forgotPassword(email: email, completion: { (error) in
             if let error = error {
                 print(error.localizedDescription)
                 self.showLoader(false)
@@ -65,8 +67,7 @@ class ForgottenPassword:UIViewController{
             print("Password reset link sent")
             self.showLoader(false)
             self.navigationController?.popViewController(animated: true)
-            
-        }
+        })
     }
     
     @objc func textDidChange(sender: UITextField){

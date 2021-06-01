@@ -1,6 +1,4 @@
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 class RegistrationController:UIViewController{
     
@@ -26,12 +24,15 @@ class RegistrationController:UIViewController{
          return InputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
 
     }()
+    
     private lazy var userNameContainerView: UIView = {
         return InputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: userNameTextField)
     }()
+    
     private lazy var fullNameContainerView: UIView = {
         return InputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: fullNameTextField)
     }()
+    
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
@@ -95,68 +96,30 @@ class RegistrationController:UIViewController{
         guard let userName = userNameTextField.text?.lowercased() else {return}
         guard let profileImage = profileImage else {return}
        showLoader(true,withText: "Signing You Up")
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
-            
+        Service.registerUser(email: email, password: password) { (user, error) in
             if let error = error {
-                print(error.localizedDescription )
+                print(error.localizedDescription)
                 return
             }
-            
             guard let uid = user?.user.uid else {
                 return
             }
-            
-            
-            let imageName = UUID().uuidString
-            let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-            
-            if let uploadData = profileImage.pngData() {
+            Service.uploadImage( profileImage: profileImage, completion: {url,error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+
+                guard let url = url else { return }
+                let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
+                Service.updteInDatabase(uid, values: values as [String : AnyObject])
+                self.showLoader(false)
+                self.dismiss(animated: true, completion: nil)
                 
-                storageRef.putData(uploadData, metadata: nil, completion: { (_, err) in
-                    
-                    if let error = error {
-                        print(error.localizedDescription)
-                        return
-                    }
-                    
-                    storageRef.downloadURL(completion: { (url, err) in
-                        if let err = err {
-                            print(err.localizedDescription)
-                            return
-                        }
-                        
-                        guard let url = url else { return }
-                        let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
-                        
-                        self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
-                        
-                    })
-                    
-                })
-            }
-        })
+            })
+        }
     }
 
-    fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
-        let ref = Database.database().reference()
-        let usersReference = ref.child("users").child(uid)
-        
-        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-            
-            if let err = err {
-                print(err.localizedDescription)
-                self.showLoader(false)
-                return
-            }
-            
-            self.showLoader(false)
-            self.dismiss(animated: true, completion: nil)
-           
-        })
-    }
-    
-    
-    
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField {
             viewModel.email = sender.text
@@ -203,6 +166,7 @@ class RegistrationController:UIViewController{
         alreadyHaveAccountButton.anchor(left:view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingBottom: 16,  paddingRight: 32)
         
     }
+    
     func configurationNotificationManager(){
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
