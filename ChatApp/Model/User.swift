@@ -13,7 +13,7 @@ class User: NSObject {
         self.fullName = dictionary["fullName"] as? String
         self.profileImageUrl = dictionary["profileImageUrl"] as? String
         self.userName = dictionary["userName"] as? String
-       
+        
         
     }
 }

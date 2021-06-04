@@ -110,7 +110,7 @@ extension NewMessageController:UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text?.lowercased() else {return}
         filteredUsers = users.filter({ user -> Bool in
             return user.userName!.contains(searchText) || user.fullName!.contains(searchText)
-
+            
         })
         self.tableView.reloadData()
         print("filtered user,\(filteredUsers)")

@@ -9,15 +9,15 @@ class UserCell: UITableViewCell{
     }
     
     private let profileImageView:UIImageView = {
-       let imgView = UIImageView()
+        let imgView = UIImageView()
         imgView.backgroundColor = .systemPurple
-       imgView.contentMode = .scaleAspectFill
-       imgView.clipsToBounds = true
+        imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
         return imgView
     }()
     
     private let userNameLabel: UILabel = {
-      let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.text = "spiderman"
         return label
@@ -25,7 +25,7 @@ class UserCell: UITableViewCell{
     
     
     private let fullNameLabel: UILabel = {
-      let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
         label.text = "Peter Parker"
@@ -61,7 +61,7 @@ class UserCell: UITableViewCell{
         
         fullNameLabel.text = user.fullName
         userNameLabel.text = user.userName
-     
+        
         guard let url = URL(string: user.profileImageUrl!) else {return}
         profileImageView.sd_setImage(with: url)
     }

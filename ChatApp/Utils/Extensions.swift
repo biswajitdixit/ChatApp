@@ -76,17 +76,9 @@ extension UIViewController{
     
     static let hud = JGProgressHUD(style: .dark)
     
-    func configureGradiantLayer() {
-        let gradiant = CAGradientLayer()
-        gradiant.colors = [UIColor.systemPurple.cgColor, UIColor.systemPink.cgColor]
-        gradiant.locations = [0, 1]
-        view.layer.addSublayer(gradiant)
-        gradiant.frame = view.frame
-    }
-    
     func showLoader(_ show: Bool, withText text: String? = "Error in Loading"){
         view.endEditing(true)
-      
+        
         UIViewController.hud.textLabel.text = text
         
         
@@ -115,3 +107,5 @@ extension UIViewController{
         
     }
 }
+
+

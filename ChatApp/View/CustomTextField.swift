@@ -7,9 +7,9 @@ class CustomTextField: UITextField{
         
         borderStyle = .none
         font = UIFont.systemFont(ofSize: 16)
-        textColor = .white
+        textColor = .black
         keyboardAppearance = .dark
-        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor.white])
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor : UIColor.systemPurple])
     }
     
     required init?(coder: NSCoder){

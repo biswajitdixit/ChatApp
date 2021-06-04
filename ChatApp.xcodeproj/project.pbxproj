@@ -15,7 +15,6 @@
 		841BA833265240FB00276689 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA832265240FB00276689 /* Service.swift */; };
 		841BA8362652450600276689 /* ForgottenPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA8352652450600276689 /* ForgottenPassword.swift */; };
 		841BA839265249E700276689 /* ForgotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BA838265249E700276689 /* ForgotViewModel.swift */; };
-		8451546F265BB3E300CCD67A /* SendButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451546E265BB3E300CCD67A /* SendButtonViewModel.swift */; };
 		8453B80A2658E2A90015D833 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453B8092658E2A90015D833 /* User.swift */; };
 		84633611264F8658007DA352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633610264F8658007DA352 /* AppDelegate.swift */; };
 		84633613264F8658007DA352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84633612264F8658007DA352 /* SceneDelegate.swift */; };
@@ -52,7 +51,6 @@
 		841BA832265240FB00276689 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		841BA8352652450600276689 /* ForgottenPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPassword.swift; sourceTree = "<group>"; };
 		841BA838265249E700276689 /* ForgotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewModel.swift; sourceTree = "<group>"; };
-		8451546E265BB3E300CCD67A /* SendButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButtonViewModel.swift; sourceTree = "<group>"; };
 		8453B8092658E2A90015D833 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8463360D264F8658007DA352 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84633610264F8658007DA352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				841BA8012650E02200276689 /* LoginViewModel.swift */,
 				841BA8042650E58400276689 /* RegistrationViewModel.swift */,
 				841BA838265249E700276689 /* ForgotViewModel.swift */,
-				8451546E265BB3E300CCD67A /* SendButtonViewModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -355,7 +352,6 @@
 				84D16C50265A27B7006BF716 /* MessageCell.swift in Sources */,
 				841BA8052650E58400276689 /* RegistrationViewModel.swift in Sources */,
 				8463363B264FAC56007DA352 /* InputContainerView.swift in Sources */,
-				8451546F265BB3E300CCD67A /* SendButtonViewModel.swift in Sources */,
 				8468FE662665F18900176CDF /* ConversationviewModel.swift in Sources */,
 				84669CBE26638583008D6BF3 /* ProfileCell.swift in Sources */,
 				84633611264F8658007DA352 /* AppDelegate.swift in Sources */,

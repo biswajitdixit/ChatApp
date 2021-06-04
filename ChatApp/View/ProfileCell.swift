@@ -22,7 +22,7 @@ class ProfileCell: UITableViewCell {
     }()
     
     private let iconImage: UIImageView = {
-      let iv = UIImageView()
+        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.setDimensions(height: 28, width: 28)

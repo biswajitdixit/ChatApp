@@ -11,7 +11,7 @@ protocol EditUserNameDelegate:class {
     func editUsername()
 }
 class Profile: UIView{
-
+    
     //Marks:- Properties
     var user: User? {
         didSet { populateUserData() }
@@ -30,7 +30,7 @@ class Profile: UIView{
         return button
     }()
     
-     var profileImageView: UIImageView = {
+    var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
@@ -52,11 +52,11 @@ class Profile: UIView{
     }()
     
     private let fullNameLabel: UILabel = {
-       let label = UILabel()
-       label.font = UIFont.boldSystemFont(ofSize: 20)
-       label.textColor = .white
-       label.textAlignment = .center
-       return label
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
         
     }()
     
@@ -85,7 +85,7 @@ class Profile: UIView{
         super.init(frame: frame)
         backgroundColor = .systemPurple
         configureUI()
-    
+        
     }
     
     required init?(coder: NSCoder) {
@@ -129,7 +129,7 @@ class Profile: UIView{
         
         addSubview(editProfileImage)
         editProfileImage.anchor(bottom: bottomAnchor, right: profileImageView.rightAnchor, paddingBottom: 80)
-      
+        
         
         let stack = UIStackView(arrangedSubviews: [fullNameLabel, userNamelabel])
         stack.axis = .vertical

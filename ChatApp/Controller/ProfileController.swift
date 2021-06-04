@@ -23,8 +23,8 @@ class ProfileController: UITableViewController {
         super.viewDidLoad()
         configureUI()
         fetchUser()
-       
-       
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +59,7 @@ class ProfileController: UITableViewController {
         fotterView.delegate = self
         fotterView.frame = .init(x: 0, y: 0, width: view.frame.width, height: 100)
         tableView.tableFooterView = fotterView
-       
+        
     }
 }
 
@@ -79,7 +79,7 @@ extension ProfileController {
 
 
 extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
-   
+    
     func dismissController() {
         dismiss(animated: true, completion: nil)
     }
@@ -96,8 +96,8 @@ extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerCo
         headerView.profileImageView.image = image
         updateImage()
         dismiss(animated: true, completion: nil)
-       
-       
+        
+        
     }
     
     func updateImage(){
@@ -107,13 +107,13 @@ extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerCo
                 print(error.localizedDescription)
                 return
             }
-
+            
             guard let url = url else { return }
             let values = ["profileImageUrl": url.absoluteString]
             Service.updteInDatabase(uid, values: values as [String : AnyObject])
             
         })
-     }
+    }
     
 }
 
@@ -134,7 +134,7 @@ extension ProfileController: ProfileFotterDelegate {
 extension ProfileController: EditUserNameDelegate{
     func editUsername() {
         var txtField = UITextField()
-       
+        
         let alert = UIAlertController(title: "Edit UserName", message: "", preferredStyle: .alert)
         
         alert.addTextField { (alertTextField) in
@@ -145,7 +145,7 @@ extension ProfileController: EditUserNameDelegate{
         let action = UIAlertAction(title: "Edit", style: .default) { (action) in
             self.updateUserName(userName:txtField.text!)
             self.headerView.userNamelabel.text = txtField.text
-             print("Edited")
+            print("Edited")
         }
         let action1 = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         alert.addAction(action)

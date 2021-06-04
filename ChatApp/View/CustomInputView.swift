@@ -14,8 +14,8 @@ class CustomInputView: UIView {
     weak var delegate: CustomInputAccessoryViewDelegate?
     weak var delegates: ImageViewDelegate?
     
-     let messageInputTextView: UITextView = {
-       let tv = UITextView()
+    let messageInputTextView: UITextView = {
+        let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.isScrollEnabled = false
         return tv
@@ -31,18 +31,18 @@ class CustomInputView: UIView {
         return button
     }()
     
-     let imageButton: UIButton = {
+    let imageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "paperclip"), for: .normal)
         button.tintColor = .systemPurple
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.systemPurple, for: .normal)
         button.addTarget(self, action: #selector(handelPhotoMessage), for: .touchUpInside)
-      return button
+        return button
     }()
     
     private let placeHolderLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Type a message"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .lightGray

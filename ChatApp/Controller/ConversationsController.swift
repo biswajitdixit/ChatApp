@@ -4,27 +4,27 @@ import Firebase
 
 private let reuseIdentifier = "ConversationCell"
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
 }
 
 fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
 }
 
 class ConvesationController:UIViewController{
-   
+    
     //Mark: - Properties
     private let tableView = UITableView()
     private let messageButton : UIButton = {
@@ -40,7 +40,7 @@ class ConvesationController:UIViewController{
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
     var timer: Timer?
-
+    
     //Marks: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,11 +52,11 @@ class ConvesationController:UIViewController{
     
     //Marks:- Selector
     @objc func showProfile(){
-       let controller = ProfileController()
+        let controller = ProfileController()
         controller.delegate = self
-       let nav = UINavigationController(rootViewController: controller)
+        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-       present(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
         
     }
     
@@ -71,14 +71,14 @@ class ConvesationController:UIViewController{
     @objc func handleReloadTable() {
         self.messages = Array(self.messagesDictionary.values)
         self.messages.sort(by: { (message1, message2) -> Bool in
-
+            
             return message1.timeStamp?.int32Value > message2.timeStamp?.int32Value
         })
         DispatchQueue.main.async(execute: {
             self.tableView.reloadData()
         })
     }
-
+    
     //Marks:- API
     func authenticationUser() {
         if Auth.auth().currentUser?.uid == nil{
@@ -95,19 +95,19 @@ class ConvesationController:UIViewController{
         }
         
     }
-
+    
     func fetchMessageWithMessageId(_ messageId: String) {
         Service.currentMessagewithId(messageId) { snapshot in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-               let message = Message(dictionary: dictionary)
+                let message = Message(dictionary: dictionary)
                 
-               if let chatPartnerId = message.chatPartnerId() {
-                 self.messagesDictionary[chatPartnerId] = message
+                if let chatPartnerId = message.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
                 }
                 self.attemptReloadOfTable()
             }
-                
-       }
+            
+        }
         
     }
     
@@ -152,15 +152,15 @@ class ConvesationController:UIViewController{
         
         view.addSubview(tableView)
         tableView.frame = view.frame
-   tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
     }
     func attemptReloadOfTable() {
         self.timer?.invalidate()
-
+        
         self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
-   
+    
 }
 
 
@@ -176,12 +176,28 @@ extension ConvesationController: UITableViewDataSource{
         let message = messages[indexPath.row]
         cell.conversation = message
         if cell.messageTextLabel.text == nil {
-            cell.messageTextLabel.text = "Media"
+            cell.messageTextLabel.text = "Photo"
         }
         
         return cell
     }
-   
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let message = self.messages[indexPath.row]
+        
+        if let chatPartnerId = message.chatPartnerId() {
+            Service.deleteMessage(chatPartnerId: chatPartnerId) { (error, ref) in
+                if error != nil {
+                    print("Failed to delete message:", error!)
+                    return
+                }
+
+                self.messagesDictionary.removeValue(forKey: chatPartnerId)
+                self.attemptReloadOfTable()
+            }
+        }
+    }
+    
     
     
 }
@@ -190,24 +206,22 @@ extension ConvesationController: UITableViewDataSource{
 extension ConvesationController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-            let message = messages[indexPath.row]
-            
-            guard let chatPartnerId = message.chatPartnerId() else {
+        let message = messages[indexPath.row]
+        
+        guard let chatPartnerId = message.chatPartnerId() else {
+            return
+        }
+
+        Service.navigateTomessenger(chatPartnerId: chatPartnerId) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: AnyObject] else {
                 return
             }
-            
-            let ref = Database.database().reference().child("users").child(chatPartnerId)
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                guard let dictionary = snapshot.value as? [String: AnyObject] else {
-                    return
-                }
-                
-                let user = User(dictionary: dictionary)
-                user.id = chatPartnerId
-                self.showChatController(user)
-                
-                }, withCancel: nil)
+
+            let user = User(dictionary: dictionary)
+            user.id = chatPartnerId
+            self.showChatController(user)
         }
+    }
     
     func showChatController(_ user: User){
         let chatLogController = ChatController(user: user)

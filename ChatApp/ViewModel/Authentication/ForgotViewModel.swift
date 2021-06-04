@@ -5,6 +5,6 @@ struct ForgotViewModel:AuthenticationProtocol{
     
     var formIsValid: Bool{
         return email?.isEmpty == false
-           
+        
     }
 }

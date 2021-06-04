@@ -8,16 +8,16 @@ class ForgottenPassword:UIViewController{
     private let iconImage: UIImageView = {
         let imgView = UIImageView()
         imgView.image = UIImage(systemName: "questionmark.circle.fill")
-        imgView.tintColor = .white
+        imgView.tintColor = .systemPurple
         return imgView
     }()
     
     private let setPassword: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Send Link", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.5212053061, blue: 1, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50)
         button.isEnabled = false
@@ -27,7 +27,7 @@ class ForgottenPassword:UIViewController{
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .white
+        button.tintColor = .systemPurple
         button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.addTarget(self, action: #selector(handelDismissal), for: .touchUpInside)
         return button
@@ -35,7 +35,7 @@ class ForgottenPassword:UIViewController{
     
     
     private lazy var emailContainerView: UIView = {
-        return InputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
+        return InputContainerView(image: UIImage(systemName: "envelope")!, textField: emailTextField)
     }()
     
     private let emailTextField = CustomTextField(placeholder: "Email")
@@ -45,10 +45,6 @@ class ForgottenPassword:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-    }
-    
-    override func viewWillLayoutSubviews() {
         configureUI()
     }
     
@@ -74,7 +70,7 @@ class ForgottenPassword:UIViewController{
         if sender == emailTextField {
             viewModel.email = sender.text
         }
-       checkFormStatus()
+        checkFormStatus()
     }
     
     @objc func handelDismissal(){
@@ -85,7 +81,7 @@ class ForgottenPassword:UIViewController{
     //Marks:- Helper
     
     func configureUI(){
-        configureGradiantLayer()
+        view.backgroundColor = .white
         view.addSubview(backButton)
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
         view.addSubview(iconImage)
@@ -112,10 +108,10 @@ extension ForgottenPassword: AuthenticationControllerProtocol {
     func checkFormStatus(){
         if viewModel.formIsValid{
             setPassword.isEnabled = true
-            setPassword.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+            setPassword.backgroundColor = .systemPurple
         }else{
             setPassword.isEnabled = false
-            setPassword.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+            setPassword.backgroundColor = #colorLiteral(red: 1, green: 0.5212053061, blue: 1, alpha: 1)
         }
     }
 }

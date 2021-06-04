@@ -9,7 +9,7 @@ class RegistrationController:UIViewController{
     private let plusPhotoButton: UIButton = {
         let buttton = UIButton(type: .system)
         buttton.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
-        buttton.tintColor = .white
+        buttton.tintColor = .systemPurple
         buttton.addTarget(self, action: #selector(handelSelectPhoto), for: .touchUpInside)
         buttton.imageView?.contentMode = .scaleAspectFill
         buttton.clipsToBounds = true
@@ -17,28 +17,28 @@ class RegistrationController:UIViewController{
     }()
     
     private lazy var emailContainerView: UIView = {
-        return InputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
+        return InputContainerView(image: UIImage(systemName: "envelope")!, textField: emailTextField)
     }()
     
     private lazy var passwordContainerView: InputContainerView = {
-         return InputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
-
+        return InputContainerView(image: UIImage(systemName: "lock")!, textField: passwordTextField)
+        
     }()
     
     private lazy var userNameContainerView: UIView = {
-        return InputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: userNameTextField)
+        return InputContainerView(image: UIImage(systemName: "person")!, textField: userNameTextField)
     }()
     
     private lazy var fullNameContainerView: UIView = {
-        return InputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: fullNameTextField)
+        return InputContainerView(image: UIImage(systemName: "person")!, textField: fullNameTextField)
     }()
     
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.5212053061, blue: 1, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50)
         button.isEnabled = false
@@ -59,10 +59,10 @@ class RegistrationController:UIViewController{
     private let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributeTitle = NSMutableAttributedString(string: "Already have an account?  ",
-                                                       attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])
+                                                       attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.systemPurple])
         
-        attributeTitle.append(NSAttributedString(string: "Log In", attributes: [.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor.white
-                                                                                               
+        attributeTitle.append(NSAttributedString(string: "Log In", attributes: [.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor: UIColor.systemPurple
+                                                                                
         ]))
         
         button.setAttributedTitle(attributeTitle, for: .normal)
@@ -95,7 +95,7 @@ class RegistrationController:UIViewController{
         guard let fullName = fullNameTextField.text else {return}
         guard let userName = userNameTextField.text?.lowercased() else {return}
         guard let profileImage = profileImage else {return}
-       showLoader(true,withText: "Signing You Up")
+        showLoader(true,withText: "Signing You Up")
         Service.registerUser(email: email, password: password) { (user, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -109,7 +109,7 @@ class RegistrationController:UIViewController{
                     print(error.localizedDescription)
                     return
                 }
-
+                
                 guard let url = url else { return }
                 let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
                 Service.updteInDatabase(uid, values: values as [String : AnyObject])
@@ -119,7 +119,7 @@ class RegistrationController:UIViewController{
             })
         }
     }
-
+    
     @objc func textDidChange(sender: UITextField){
         if sender == emailTextField {
             viewModel.email = sender.text
@@ -130,7 +130,7 @@ class RegistrationController:UIViewController{
         }else{
             viewModel.userName = sender.text
         }
-       checkFormStatus()
+        checkFormStatus()
     }
     
     @objc func keyboardWillShow(){
@@ -149,7 +149,7 @@ class RegistrationController:UIViewController{
     
     
     func configureUI(){
-        configureGradiantLayer()
+        view.backgroundColor = .white
         view.addSubview(plusPhotoButton)
         plusPhotoButton.centerX(inView: view)
         plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 15)
@@ -189,7 +189,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         plusPhotoButton.layer.borderWidth = 3.0
         plusPhotoButton.layer.cornerRadius = 200/2
         dismiss(animated: true, completion: nil)
-       
+        
     }
 }
 
@@ -197,11 +197,11 @@ extension RegistrationController: AuthenticationControllerProtocol {
     func checkFormStatus() {
         if viewModel.formIsValid{
             signUpButton.isEnabled = true
-            signUpButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+            signUpButton.backgroundColor = .systemPurple
         }else{
             signUpButton.isEnabled = false
-            signUpButton.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+            signUpButton.backgroundColor = #colorLiteral(red: 1, green: 0.5212053061, blue: 1, alpha: 1)
         }
     }
     
-    }
+}

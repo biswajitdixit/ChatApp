@@ -24,15 +24,15 @@ class MessageCell: UICollectionViewCell {
     
     
     private let profileImageView:UIImageView = {
-       let imgView = UIImageView()
+        let imgView = UIImageView()
         imgView.backgroundColor = .lightGray
-       imgView.contentMode = .scaleAspectFill
-       imgView.clipsToBounds = true
+        imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
         return imgView
     }()
     
-     let textView: UITextView = {
-       let txtView = UITextView()
+    let textView: UITextView = {
+        let txtView = UITextView()
         txtView.backgroundColor = .clear
         txtView.font = .systemFont(ofSize: 16)
         txtView.isScrollEnabled = false
@@ -52,8 +52,8 @@ class MessageCell: UICollectionViewCell {
         return imageView
     }()
     
-     let bubbleContainer: UIView = {
-       let view = UIView()
+    let bubbleContainer: UIView = {
+        let view = UIView()
         view.backgroundColor = .systemPurple
         return view
     }()
@@ -80,11 +80,11 @@ class MessageCell: UICollectionViewCell {
         
         bubbleContainer.addSubview(textView)
         textView.anchor(top: bubbleContainer.topAnchor, left: bubbleContainer.leftAnchor, bottom: bubbleContainer.bottomAnchor, right: bubbleContainer.rightAnchor, paddingTop: 4, paddingLeft: 12, paddingBottom: 4, paddingRight: 12)
-
+        
         bubbleContainer.addSubview(messageImageView)
         messageImageView.anchor(top: bubbleContainer.topAnchor, left: bubbleContainer.leftAnchor, bottom: bubbleContainer.bottomAnchor, right: bubbleContainer.rightAnchor, paddingTop: 2, paddingLeft: 2, paddingBottom: 2, paddingRight: 2)
-
-        }
+        
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -113,7 +113,7 @@ class MessageCell: UICollectionViewCell {
         
     }
     
-
+    
     func performZoomInForStartingImageView(_ startingImageView: UIImageView) {
         
         self.startingImageView = startingImageView
@@ -145,7 +145,7 @@ class MessageCell: UICollectionViewCell {
                 
                 zoomingImageView.center = keyWindow.center
                 
-                }, completion: { (completed) in
+            }, completion: { (completed) in
             })
             
         }
@@ -161,9 +161,9 @@ class MessageCell: UICollectionViewCell {
                 zoomOutImageView.frame = self.startingFrame!
                 self.blackBackgroundView?.alpha = 0
                 self.zoomDelegate?.customView(alphaValue: 1)
-                }, completion: { (completed) in
-                    zoomOutImageView.removeFromSuperview()
-                    self.startingImageView?.isHidden = false
+            }, completion: { (completed) in
+                zoomOutImageView.removeFromSuperview()
+                self.startingImageView?.isHidden = false
             })
         }
     }

@@ -6,7 +6,7 @@ class ConversationCell:UITableViewCell {
     //Marks:- Properties
     
     var conversation: Message? {
-    didSet { configure() }
+        didSet { configure() }
     }
     
     let profileImageView: UIImageView = {
@@ -19,12 +19,12 @@ class ConversationCell:UITableViewCell {
     }()
     
     let userNameLabel:UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     let timeStampLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .darkGray
         label.text = "2h"
@@ -32,7 +32,7 @@ class ConversationCell:UITableViewCell {
     }()
     
     let messageTextLabel:UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -72,19 +72,19 @@ class ConversationCell:UITableViewCell {
         timeStampLabel.text = viewModel.timeStamp
         
         if let id = conversation.chatPartnerId() {
-              
-            Service.fetchUsernameAndImage(id: id) { snapshot in
             
-                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                        self.userNameLabel.text = dictionary["userName"] as? String
-
-                        if let profileImageUrl = dictionary["profileImageUrl"] as? String {
-                            self.profileImageView.sd_setImage(with: URL(string:profileImageUrl))
-                            print(profileImageUrl)
-                        }
+            Service.fetchUsernameAndImage(id: id) { snapshot in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    self.userNameLabel.text = dictionary["userName"] as? String
+                    
+                    if let profileImageUrl = dictionary["profileImageUrl"] as? String {
+                        self.profileImageView.sd_setImage(with: URL(string:profileImageUrl))
+                        print(profileImageUrl)
                     }
-                 }
+                }
             }
         }
+    }
 }
 

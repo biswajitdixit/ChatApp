@@ -8,7 +8,7 @@ struct Service {
     //Marks:-Authentication
     
     static func registerUser(email:String,password:String,_ completion:@escaping ((AuthDataResult?, Error?) -> Void)){
-       
+        
         Auth.auth().createUser(withEmail: email, password: password, completion: completion )
         
     }
@@ -21,10 +21,11 @@ struct Service {
         Auth.auth().sendPasswordReset(withEmail: email,completion: completion)
     }
     
-     static func currentUser() -> String  {
+    static func currentUser() -> String  {
         guard let uid = Auth.auth().currentUser?.uid else {return "no id"}
         return uid
     }
+   
     //Marks:- Database
     
     static func updteInDatabase(_ uid: String, values: [String: AnyObject]) {
@@ -35,26 +36,26 @@ struct Service {
             
             if let err = err {
                 print(err.localizedDescription)
-
+                
                 return
             }
-           
+            
         })
     }
     
     static func uploadImage(profileImage:UIImage,completion:@escaping ((URL?,Error?)->Void) ){
         
-    let imageName = UUID().uuidString
-    let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
-    
-    if let uploadData = profileImage.pngData() {
+        let imageName = UUID().uuidString
+        let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).png")
         
-        storageRef.putData(uploadData, metadata: nil,  completion: { (_, err) in
+        if let uploadData = profileImage.pngData() {
             
-        storageRef.downloadURL(completion: completion)
-       
-          })
-       }
+            storageRef.putData(uploadData, metadata: nil,  completion: { (_, err) in
+                
+                storageRef.downloadURL(completion: completion)
+                
+            })
+        }
     }
     
     
@@ -68,7 +69,7 @@ struct Service {
                 if user.id != Auth.auth().currentUser?.uid {
                     users.append(user)
                 }
-                   
+                
                 
                 Completion(users)
             }
@@ -86,20 +87,20 @@ struct Service {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-
+        
         let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
-
+            
             let userId = snapshot.key
             Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: completion)
-
-            }, withCancel: nil)
+            
+        }, withCancel: nil)
     }
     
     
     static func currentMessagewithId(_ messageId: String, completion:  @escaping ((DataSnapshot) -> Void)){
         let messagesReference = Database.database().reference().child("messages").child(messageId)
-
+        
         messagesReference.observeSingleEvent(of: .value, with: completion)
     }
     
@@ -184,5 +185,15 @@ struct Service {
         }
     }
     
-   
+    static func navigateTomessenger(chatPartnerId:String,completion:@escaping ((DataSnapshot)-> Void)){
+        let ref = Database.database().reference().child("users").child(chatPartnerId)
+        ref.observeSingleEvent(of: .value, with: completion)
+    }
+    
+    static func deleteMessage(chatPartnerId:String, completion:@escaping (Error?,DatabaseReference)-> Void){
+        let uid = currentUser()
+        Database.database().reference().child("user-messages").child(uid).child(chatPartnerId).removeValue(completionBlock: completion)
+    }
+    
+    
 }
