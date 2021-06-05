@@ -1,10 +1,9 @@
 import UIKit
-import Firebase
 import SDWebImage
 
 private let reuseIdentifier = "MessageCell"
 class ChatController: UICollectionViewController {
-   
+    
     //Marks:- Properties
     
     private let user:User
@@ -14,7 +13,7 @@ class ChatController: UICollectionViewController {
     private lazy var customInputView :CustomInputView = {
         let iv = CustomInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         iv.delegate = self
-        iv.delegates = self
+        //  iv.delegates = self
         return iv
     }()
     
@@ -31,6 +30,7 @@ class ChatController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
         fetchMessages()
         
     }
@@ -48,10 +48,7 @@ class ChatController: UICollectionViewController {
     func fetchMessages() {
         Service.observeMessages(forUser: user) { (snapshot) in
             let messageId = snapshot.key
-          
-            let messagesRef = Database.database().reference().child("messages").child(messageId)
-            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
-
+            Service.fetchMessages(messageId: messageId, completion: { (snapshot) in
                 guard let dictionary = snapshot.value as? [String: AnyObject] else {
                     return
                 }
@@ -61,11 +58,10 @@ class ChatController: UICollectionViewController {
                     self.collectionView.scrollToItem(at: [0, self.messages.count - 1], at: .bottom, animated: true)
                 })
                 
-                })
-
-            }
+            })
+        }
     }
-             
+    
     //Mark:- Helpers
     
     func configureUI(){
@@ -73,8 +69,15 @@ class ChatController: UICollectionViewController {
         configureNavigationBar(withTitle: user.userName!, prefersLargeTitles: false)
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.alwaysBounceVertical = true
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationRecived), name: Notification.Name("sendImage"), object: nil)
         
+        
+    }
     
+    //Mark:-Selectors
+    @objc  func notificationRecived() {
+        handleUploadTap()
+        
     }
     
 }
@@ -113,7 +116,7 @@ extension ChatController : UICollectionViewDelegateFlowLayout {
         var height: CGFloat = 80
         
         if let imageWidth = estimateSizeCell.message?.imageWidth?.floatValue, let imageHeight = estimateSizeCell.message?.imageHeight?.floatValue {
-                height = CGFloat(imageHeight / imageWidth * 200)
+            height = CGFloat(imageHeight / imageWidth * 200)
             
         }else{
             let targetSize = CGSize(width: view.frame.width, height: 1000)
@@ -130,28 +133,24 @@ extension ChatController : UICollectionViewDelegateFlowLayout {
 }
 
 
-extension ChatController: CustomInputAccessoryViewDelegate , ImageViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ChatController: CustomInputAccessoryViewDelegate , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func inputView(_ inputView: CustomInputView, wantsToSend message: String) {
         Service.sendMessage(inputTextField: inputView.messageInputTextView.text, id: user.id!, completion: {
             (error, ref) in
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                
+            if error != nil {
+                print(error!)
+                return
+            }
+            
             inputView.messageInputTextView.text = nil
-                guard let messageId = ref.key else { return }
+            guard let messageId = ref.key else { return }
             Service.senderReciptanatMessage( messageId: messageId, toId: self.user.id!)
         })
     }
     
-    func inputImage() {
-        handleUploadTap()
-        
-    }
     
-     func handleUploadTap() {
+    func handleUploadTap() {
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.allowsEditing = true
@@ -171,21 +170,21 @@ extension ChatController: CustomInputAccessoryViewDelegate , ImageViewDelegate, 
             selectedImageFromPicker = originalImage
         }
         
-       
+        
         if let selectedImage = selectedImageFromPicker {
             Service.uploadImageMessageToFirebase(selectedImage,completion: { (imageUrl) in
                 Service.sendImage(imageUrl, image: selectedImage,id: self.user.id!, completion: {
                     (error, ref) in
-                        if error != nil {
-                            print(error!)
-                            return
-                        }
-                        guard let messageId = ref.key else { return }
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    guard let messageId = ref.key else { return }
                     Service.senderReciptanatMessage( messageId: messageId, toId: self.user.id!)
-            })
-        }
-       
-        )}
+                })
+            }
+            
+            )}
         dismiss(animated: true, completion: nil)
     }
     

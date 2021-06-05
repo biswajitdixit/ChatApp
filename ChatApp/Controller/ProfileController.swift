@@ -12,7 +12,9 @@ class ProfileController: UITableViewController {
     private var user: User? {
         didSet { headerView.user = user}
     }
+    
     private lazy var headerView = Profile(frame: .init(x: 0, y: 0, width: view.frame.width, height: 380))
+    
     private let fotterView = ProfileLogout()
     
     weak var delegate: ProfileControllerDelegate?
@@ -48,18 +50,21 @@ class ProfileController: UITableViewController {
         
         tableView.tableHeaderView = headerView
         headerView.delegate = self
-        headerView.imageDelegate = self
-        headerView.userNameDelegate = self
         tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifer)
         tableView.tableFooterView = UIView()
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = 70
         tableView.backgroundColor = .systemGroupedBackground
         
-        fotterView.delegate = self
         fotterView.frame = .init(x: 0, y: 0, width: view.frame.width, height: 100)
         tableView.tableFooterView = fotterView
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationRecived), name: Notification.Name("logOut"), object: nil)
         
+    }
+    
+    //Mars:-Selector
+    @objc func notificationRecived(){
+        handelLogout()
     }
 }
 
@@ -78,7 +83,7 @@ extension ProfileController {
 }
 
 
-extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
+extension ProfileController : ProfileDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
     
     func dismissController() {
         dismiss(animated: true, completion: nil)
@@ -117,7 +122,8 @@ extension ProfileController : ProfileDelegate, EditProfileImage, UIImagePickerCo
     
 }
 
-extension ProfileController: ProfileFotterDelegate {
+extension ProfileController{
+    
     func handelLogout() {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to logout?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { _ in
@@ -131,7 +137,7 @@ extension ProfileController: ProfileFotterDelegate {
     }
 }
 
-extension ProfileController: EditUserNameDelegate{
+extension ProfileController{
     func editUsername() {
         var txtField = UITextField()
         

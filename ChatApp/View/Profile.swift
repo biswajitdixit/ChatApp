@@ -3,11 +3,7 @@ import SDWebImage
 
 protocol ProfileDelegate:class {
     func dismissController()
-}
-protocol EditProfileImage:class {
     func editProfileImage()
-}
-protocol EditUserNameDelegate:class {
     func editUsername()
 }
 class Profile: UIView{
@@ -18,8 +14,6 @@ class Profile: UIView{
     }
     
     weak var delegate: ProfileDelegate?
-    weak var imageDelegate: EditProfileImage?
-    weak var userNameDelegate: EditUserNameDelegate?
     
     private let dismissButton: UIButton = {
         let button = UIButton(type: .system)
@@ -99,11 +93,11 @@ class Profile: UIView{
     }
     
     @objc func editImage(){
-        imageDelegate?.editProfileImage()
+        delegate?.editProfileImage()
     }
     
     @objc func edituserName(){
-        userNameDelegate?.editUsername()
+        delegate?.editUsername()
     }
     //Marks: - Helpers
     

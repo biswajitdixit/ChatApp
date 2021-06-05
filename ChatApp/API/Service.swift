@@ -13,19 +13,37 @@ struct Service {
         
     }
     
+    
     static func Login(email:String, password:String,_ completion:@escaping ((AuthDataResult?, Error?) -> Void)){
         Auth.auth().signIn(withEmail: email, password: password,completion: completion)
     }
+    
     
     static func forgotPassword(email:String, completion:@escaping((Error?)->Void)){
         Auth.auth().sendPasswordReset(withEmail: email,completion: completion)
     }
     
+    
     static func currentUser() -> String  {
         guard let uid = Auth.auth().currentUser?.uid else {return "no id"}
         return uid
     }
-   
+    
+    static func autologinUser() ->String? {
+        let uid = Auth.auth().currentUser?.uid
+        return uid
+    }
+    
+    
+    static func handelSignOut()->Bool {
+        do{
+            try Auth.auth().signOut()
+            return true
+        }catch {
+            return false
+        }
+    }
+    
     //Marks:- Database
     
     static func updteInDatabase(_ uid: String, values: [String: AnyObject]) {
@@ -42,6 +60,7 @@ struct Service {
             
         })
     }
+    
     
     static func uploadImage(profileImage:UIImage,completion:@escaping ((URL?,Error?)->Void) ){
         
@@ -160,6 +179,12 @@ struct Service {
     }
     
     
+    static func fetchMessages(messageId:String,completion:@escaping (DataSnapshot)->Void){
+        let messagesRef = Database.database().reference().child("messages").child(messageId)
+        messagesRef.observeSingleEvent(of: .value, with: completion)
+    }
+    
+    
     static func uploadImageMessageToFirebase(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
         let imageName = UUID().uuidString
         let ref = Storage.storage().reference().child("message_images").child(imageName)
@@ -185,10 +210,12 @@ struct Service {
         }
     }
     
+    
     static func navigateTomessenger(chatPartnerId:String,completion:@escaping ((DataSnapshot)-> Void)){
         let ref = Database.database().reference().child("users").child(chatPartnerId)
         ref.observeSingleEvent(of: .value, with: completion)
     }
+    
     
     static func deleteMessage(chatPartnerId:String, completion:@escaping (Error?,DatabaseReference)-> Void){
         let uid = currentUser()

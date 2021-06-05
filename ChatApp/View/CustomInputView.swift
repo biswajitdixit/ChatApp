@@ -3,16 +3,12 @@ import UIKit
 protocol CustomInputAccessoryViewDelegate: class {
     func inputView(_ inputView: CustomInputView, wantsToSend message: String)
 }
-protocol  ImageViewDelegate: class {
-    func inputImage()
-}
 
 class CustomInputView: UIView {
     
     //Marks:- Properties
     
     weak var delegate: CustomInputAccessoryViewDelegate?
-    weak var delegates: ImageViewDelegate?
     
     let messageInputTextView: UITextView = {
         let tv = UITextView()
@@ -99,7 +95,7 @@ class CustomInputView: UIView {
     }
     
     @objc func handelPhotoMessage(){
-        delegates?.inputImage()
+        NotificationCenter.default.post(name:Notification.Name("sendImage"), object: nil)
         
     }
 }

@@ -1,7 +1,5 @@
 import UIKit
 
-
-
 protocol AuthenticationControllerProtocol {
     func checkFormStatus()
 }

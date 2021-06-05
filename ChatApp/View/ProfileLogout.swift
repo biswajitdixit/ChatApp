@@ -1,13 +1,7 @@
 import UIKit
-
-protocol ProfileFotterDelegate: class{
-    func handelLogout()
-}
-
 class ProfileLogout:UIView {
     
     //Marks:- Properties
-    weak var delegate: ProfileFotterDelegate?
     private lazy var logoutButton:UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Logout", for: .normal)
@@ -35,7 +29,7 @@ class ProfileLogout:UIView {
     
     //Selectors:- Selectors
     @objc func Logout(){
-        delegate?.handelLogout()
+        NotificationCenter.default.post(name:Notification.Name("logOut"), object: nil)
     }
     
 }

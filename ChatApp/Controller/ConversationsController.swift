@@ -1,6 +1,5 @@
 
 import UIKit
-import Firebase
 
 private let reuseIdentifier = "ConversationCell"
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -81,11 +80,12 @@ class ConvesationController:UIViewController{
     
     //Marks:- API
     func authenticationUser() {
-        if Auth.auth().currentUser?.uid == nil{
+        let uid = Service.autologinUser()
+        if uid == nil{
             presentLoginScreen()
             print("User is not logeed in . Present log in screen")
         }else{
-            print("user id id \(Auth.auth().currentUser?.uid)")
+            print("user id id \(uid!)")
         }
     }
     func observeUserMessages() {
@@ -191,7 +191,7 @@ extension ConvesationController: UITableViewDataSource{
                     print("Failed to delete message:", error!)
                     return
                 }
-
+                
                 self.messagesDictionary.removeValue(forKey: chatPartnerId)
                 self.attemptReloadOfTable()
             }
@@ -211,12 +211,12 @@ extension ConvesationController: UITableViewDelegate{
         guard let chatPartnerId = message.chatPartnerId() else {
             return
         }
-
+        
         Service.navigateTomessenger(chatPartnerId: chatPartnerId) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: AnyObject] else {
                 return
             }
-
+            
             let user = User(dictionary: dictionary)
             user.id = chatPartnerId
             self.showChatController(user)
@@ -241,13 +241,14 @@ extension ConvesationController: NewMessageControllerDelegate {
 }
 
 extension ConvesationController: ProfileControllerDelegate {
+    
     func handelSignOut() {
-        do{
-            try Auth.auth().signOut()
+        let logout = Service.handelSignOut()
+        if logout == true {
             presentLoginScreen()
-            print("logout successFully")
-        }catch {
-            print("Error in signOut")
+            print("Log out Sucessfully")
+        }else{
+            print("Error in logout")
         }
     }
     
