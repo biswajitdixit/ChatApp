@@ -6,7 +6,8 @@ struct LoginViewModel:AuthenticationProtocol{
     var password: String?
     
     var formIsValid: Bool{
-        return email?.isEmpty == false
-            &&  password?.isEmpty == false
+        
+        return email?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty == false
+            &&  password?.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty == false
     }
 }

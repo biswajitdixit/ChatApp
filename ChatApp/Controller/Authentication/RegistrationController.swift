@@ -95,28 +95,39 @@ class RegistrationController:UIViewController{
         guard let fullName = fullNameTextField.text else {return}
         guard let userName = userNameTextField.text?.lowercased() else {return}
         guard let profileImage = profileImage else {return}
-        showLoader(true,withText: "Signing You Up")
-        Service.registerUser(email: email, password: password) { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            guard let uid = user?.user.uid else {
-                return
-            }
-            Service.uploadImage( profileImage: profileImage, completion: {url,error in
+        if !email.validateEmailId(){
+            openAlert(title: "Alert", message: "Enter valid email.", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in
+                print("Okay clicked!")
+            }])
+        }else if !password.validatePassword(){
+            openAlert(title: "Alert", message: "Please enter valid password", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in
+                print("Okay clicked!")
+            }])
+            
+        } else{
+            showLoader(true,withText: "Signing You Up")
+            Service.registerUser(email: email, password: password) { (user, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     return
                 }
-                
-                guard let url = url else { return }
-                let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
-                Service.updteInDatabase(uid, values: values as [String : AnyObject])
-                self.showLoader(false)
-                self.dismiss(animated: true, completion: nil)
-                
-            })
+                guard let uid = user?.user.uid else {
+                    return
+                }
+                Service.uploadImage( profileImage: profileImage, completion: {url,error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    guard let url = url else { return }
+                    let values = ["fullName": fullName, "email": email,"userName": userName, "profileImageUrl": url.absoluteString]
+                    Service.updteInDatabase(uid, values: values as [String : AnyObject])
+                    self.showLoader(false)
+                    self.dismiss(animated: true, completion: nil)
+                    
+                })
+            }
         }
     }
     

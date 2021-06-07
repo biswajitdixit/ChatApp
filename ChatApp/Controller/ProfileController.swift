@@ -33,7 +33,7 @@ class ProfileController: UITableViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
-    //Marks:-Selectors
+    
     
     
     //Marks:- API
@@ -47,7 +47,6 @@ class ProfileController: UITableViewController {
     
     func configureUI(){
         tableView.backgroundColor = .white
-        
         tableView.tableHeaderView = headerView
         headerView.delegate = self
         tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifer)

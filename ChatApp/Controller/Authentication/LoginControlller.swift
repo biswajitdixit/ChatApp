@@ -98,19 +98,29 @@ class LoginController:UIViewController{
     @objc func handelLogin(){
         guard let email = emailTextField.text else{return}
         guard let password = passwordTextField.text else{return}
-        showLoader(true,withText: "Loggin in ")
-        Service.Login(email: email, password: password, {
-            authResult, error in
-            if let e = error{
-                print(e.localizedDescription)
-                print("Person not yet Registered")
+        if !email.validateEmailId(){
+            openAlert(title: "Alert", message: "Enter valid email.", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in
+                print("Okay clicked!")
+            }])
+        }else if !password.validatePassword(){
+            openAlert(title: "Alert", message: "Please enter valid password", alertStyle: .alert, actionTitles: ["Okay"], actionStyles: [.default], actions: [{ _ in
+                print("Okay clicked!")
+            }])
+        }
+        else{
+            showLoader(true,withText: "Loggin in ")
+            Service.Login(email: email, password: password, {
+                authResult, error in
+                if let e = error{
+                    print(e.localizedDescription)
+                    print("Person not yet Registered")
+                    self.showLoader(false)
+                    return
+                    
+                }
                 self.showLoader(false)
-                return
-                
-            }
-            self.showLoader(false)
-            self.dismiss(animated: true, completion: nil)
-        })
+                self.dismiss(animated: true, completion: nil)
+            })}
         
     }
     

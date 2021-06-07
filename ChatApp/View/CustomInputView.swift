@@ -9,11 +9,10 @@ class CustomInputView: UIView {
     //Marks:- Properties
     
     weak var delegate: CustomInputAccessoryViewDelegate?
-    
     let messageInputTextView: UITextView = {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
-        tv.isScrollEnabled = false
+        tv.isScrollEnabled = true
         return tv
     }()
     
@@ -23,13 +22,14 @@ class CustomInputView: UIView {
         button.tintColor = .systemPurple
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.systemPurple, for: .normal)
+        button.isEnabled = false
         button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
         return button
     }()
     
     let imageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.setImage(UIImage(systemName: "photo.fill"), for: .normal)
         button.tintColor = .systemPurple
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitleColor(.systemPurple, for: .normal)
@@ -73,6 +73,7 @@ class CustomInputView: UIView {
         placeHolderLabel.centerY(inView: messageInputTextView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handelTextInputChange), name: UITextView.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChanges), name:UITextView.textDidChangeNotification , object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -98,4 +99,11 @@ class CustomInputView: UIView {
         NotificationCenter.default.post(name:Notification.Name("sendImage"), object: nil)
         
     }
+    @objc func textDidChanges(sender:UITextView){
+        sendButton.isEnabled = !messageInputTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty
+    }
+    
 }
+
+
+

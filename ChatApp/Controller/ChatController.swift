@@ -13,7 +13,6 @@ class ChatController: UICollectionViewController {
     private lazy var customInputView :CustomInputView = {
         let iv = CustomInputView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         iv.delegate = self
-        //  iv.delegates = self
         return iv
     }()
     
@@ -82,7 +81,6 @@ class ChatController: UICollectionViewController {
     
 }
 
-
 extension ChatController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
@@ -136,7 +134,7 @@ extension ChatController : UICollectionViewDelegateFlowLayout {
 extension ChatController: CustomInputAccessoryViewDelegate , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func inputView(_ inputView: CustomInputView, wantsToSend message: String) {
-        Service.sendMessage(inputTextField: inputView.messageInputTextView.text, id: user.id!, completion: {
+        Service.sendMessage(inputTextField: inputView.messageInputTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines), id: user.id!, completion: {
             (error, ref) in
             if error != nil {
                 print(error!)
